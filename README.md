@@ -74,5 +74,8 @@ That's it. The GitHub Action will automatically wake up and run the script on th
 
 ---
 
-## 📄 License
-This project is open-source and available under the [MIT License](LICENSE).
+## 📄 License & Usage
+
+This project is completely open-source under the [MIT License](LICENSE). 
+
+Anyone is completely free to use, copy, or modify this code for their own projects! If you find it helpful, a shoutout or mention to me is always appreciated, but definitely not required. No worries either way—just build something awesome!
