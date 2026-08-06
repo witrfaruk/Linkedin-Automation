@@ -17,7 +17,7 @@ export async function getArticles(): Promise<Article[]> {
       topic: "news",
       search_depth: "advanced",
       time_range: "week",
-      max_results: 5,
+      max_results: 30,
       include_answer: true,
       include_raw_content: false,
       include_images: false,

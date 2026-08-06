@@ -43,41 +43,27 @@ export async function POST(req: Request) {
       try {
         const globalTimeout = withTimeout(new AbortController().signal, 55000);
 
-        log("Fetching top 5 articles via Tavily...");
+        log("Fetching top 30 articles via Tavily...");
         const articles = await getArticles();
         log(`Fetched ${articles.length} articles.`);
 
-        log("Evaluating articles via One Chooser AI to find the best...");
-        const evaluations = await Promise.allSettled(
-          articles.map(async (article) => {
-            const result = await chooseBestArticle(article, globalTimeout);
-            if (result.trim().toUpperCase() === "SKIP") return null;
-            try {
-              const parsed = JSON.parse(result);
-              return { article, parsed };
-            } catch (e) {
-              return null; 
-            }
-          })
-        );
-
-        const validEvaluations = evaluations
-          .filter((e): e is PromiseFulfilledResult<{ article: any, parsed: any }> => e.status === "fulfilled" && e.value !== null)
-          .map(e => e.value);
-
-        if (validEvaluations.length === 0) {
-          log("All 5 articles were rejected (SKIP). Stopping automation.");
-          sendSuccess();
-          controller.close();
-          return;
+        log("Evaluating all articles via One Chooser AI in a single pass to find the absolute best...");
+        const result = await chooseBestArticle(articles, globalTimeout);
+        let parsed;
+        try {
+          parsed = JSON.parse(result);
+        } catch(e) {
+          throw new Error("One Chooser AI failed to return valid JSON");
         }
 
-        validEvaluations.sort((a, b) => (b.parsed.viral_score || 0) - (a.parsed.viral_score || 0));
-        const bestEval = validEvaluations[0];
-        const bestArticle = bestEval.article;
-        const enhancedContext = `Summary: ${bestEval.parsed.summary}\nWhy it matters: ${bestEval.parsed.why_it_matters}`;
+        if (parsed.best_article_index === undefined || parsed.best_article_index < 0 || parsed.best_article_index >= articles.length) {
+          throw new Error("One Chooser AI returned an invalid article index");
+        }
+
+        const bestArticle = articles[parsed.best_article_index];
+        const enhancedContext = `Summary: ${parsed.summary}\nWhy it matters: ${parsed.why_it_matters}`;
         
-        log(`Selected article: "${bestArticle.title}" with score ${bestEval.parsed.viral_score}`);
+        log(`Selected article: "${bestArticle.title}" with score ${parsed.viral_score}`);
 
         log("Generating LinkedIn post via OpenRouter (Writer)...");
         const postContent = await generateLinkedInPost(bestArticle, enhancedContext, globalTimeout);
