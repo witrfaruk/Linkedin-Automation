@@ -25,7 +25,7 @@ export async function POST(req: Request) {
 
     const globalTimeout = withTimeout(new AbortController().signal, 55000);
 
-    log("Fetching top 30 articles via Tavily...");
+    log("Fetching top 5 articles via Tavily...");
     const articles = await getArticles();
     log(`Fetched ${articles.length} articles.`);
 
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
       .map(e => e.value);
 
     if (validEvaluations.length === 0) {
-      log("All 30 articles were rejected (SKIP). Stopping automation.");
+      log("All 5 articles were rejected (SKIP). Stopping automation.");
       return NextResponse.json({ success: true, skipped: true, logs });
     }
 
