@@ -1,8 +1,35 @@
 # LinkedIn Auto Poster
 
-AI-driven autonomous startup news curation and publishing built with Next.js, OpenRouter, Tavily, and Pexels. Designed to exactly mirror automated n8n workflows in a robust, serverless environment.
+Fully autonomous, AI-driven startup news curation and publishing automation. This runs entirely in the background using GitHub Actions, analyzing trending startup news and posting high-quality, founder-focused insights directly to a LinkedIn Company Page.
 
-## 🚀 How to Install
+## 🚀 How It Works
+
+1. **News Curation (Tavily):** Scrapes top-tier startup publications (TechCrunch, Forbes, YC, a16z, etc.) for the best news published in the last 48 hours.
+2. **AI Evaluation (OpenRouter/Nemotron):** Analyzes up to 30 articles in a single pass to identify the *single best story* with the highest viral and engagement potential for founders.
+3. **Copywriting (OpenRouter/Nemotron):** Transforms the chosen article into a professional, engaging, and high-retention LinkedIn post.
+4. **Image Generation (Pexels):** Dynamically generates a highly relevant business keyword based on the post and downloads a professional stock image.
+5. **Publishing (LinkedIn API):** Uploads the image and publishes the post directly to a LinkedIn Organization page.
+
+All of this happens autonomously, 5 times a day, with ZERO human intervention.
+
+---
+
+## ⏰ When It Runs
+
+This automation is scheduled via GitHub Actions (`.github/workflows/cron.yml`) to run at the absolute best times for LinkedIn engagement. 
+
+**Scheduled Times (US Eastern Time - ET):**
+- 8:00 AM ET 
+- 10:00 AM ET
+- 12:00 PM ET
+- 2:00 PM ET
+- 5:00 PM ET
+
+---
+
+## 💻 How to Run Locally
+
+If you want to manually test the script on your own computer:
 
 1. Clone the repository.
 2. Install dependencies:
@@ -14,78 +41,38 @@ AI-driven autonomous startup news curation and publishing built with Next.js, Op
    cp .env.example .env.local
    ```
 4. Fill in all required keys in `.env.local`.
+5. Run the automation script:
+   ```bash
+   npm start
+   ```
 
-## 💻 How to Run Locally
-
-Start the development server:
+### 🔐 Generating a LinkedIn Refresh Token
+LinkedIn requires a Refresh Token (3-legged OAuth) to post to an Organization page. If you need a new token, run the built-in generator script:
 ```bash
-npm run dev
+npm run auth
 ```
-Open `http://localhost:3000` in your browser.
-
-## 🧪 How to Test Endpoints Locally
-
-### 1. Manual Trigger (`/api/run`)
-- Open the UI at `http://localhost:3000`.
-- Click **Run Now**.
-- Enter your `MANUAL_RUN_SECRET` (configured in `.env.local`) into the password modal.
-- The UI will stream live logs as it evaluates articles and publishes to LinkedIn.
-
-### 2. Cron Trigger (`/api/cron`)
-You can simulate the GitHub Actions cron job locally via cURL or Postman:
-```bash
-curl -X POST http://localhost:3000/api/cron \
-  -H "Authorization: Bearer YOUR_CRON_SECRET_HERE"
-```
+Follow the terminal instructions to instantly get a new token securely.
 
 ---
 
-## ☁️ How to Deploy to Vercel
+## ☁️ How to Deploy on GitHub Actions
 
-1. Push this code to a new GitHub repository.
-2. Log in to [Vercel](https://vercel.com) and click **Add New Project**.
-3. Import your GitHub repository.
-4. Expand the **Environment Variables** section.
-5. Paste all key-value pairs from `.env.local` into the Vercel dashboard.
-6. Click **Deploy**.
+You do **not** need Vercel, AWS, or any server. This runs 100% free on GitHub.
 
-### Required Vercel Environment Variables
-- `CRON_SECRET`
-- `MANUAL_RUN_SECRET`
-- `OPENROUTER_API_KEY`
-- `TAVILY_API_KEY`
-- `PEXELS_API_KEY`
-- `LINKEDIN_CLIENT_ID`
-- `LINKEDIN_CLIENT_SECRET`
-- `LINKEDIN_ORGANIZATION_ID`
+1. Push this code to a public or private GitHub repository.
+2. Go to your repository **Settings > Secrets and variables > Actions**.
+3. Click **New repository secret** and add the following 7 secrets:
+   - `OPENROUTER_API_KEY`
+   - `TAVILY_API_KEY`
+   - `PEXELS_API_KEY`
+   - `LINKEDIN_CLIENT_ID`
+   - `LINKEDIN_CLIENT_SECRET`
+   - `LINKEDIN_ORGANIZATION_ID`
+   - `LINKEDIN_REFRESH_TOKEN`
+
+That's it. The GitHub Action will automatically wake up and run the script on the scheduled hours.
 
 ---
 
-## ⚙️ How to Configure GitHub Actions (Cron)
-
-This project uses a GitHub Actions workflow to run 5 times a day corresponding to peak LinkedIn engagement.
-
-1. Go to your repository on GitHub.
-2. Navigate to **Settings > Secrets and variables > Actions**.
-3. Click **New repository secret** and add:
-   - Name: `CRON_URL`
-   - Value: `https://your-vercel-deployment-url.vercel.app/api/cron`
-4. Click **New repository secret** again and add:
-   - Name: `CRON_SECRET`
-   - Value: (The exact string you put for `CRON_SECRET` in Vercel)
-
-The `.github/workflows/cron.yml` file will automatically start pinging your app on the scheduled UTC times.
-
----
-
-## 🔐 LinkedIn Authentication
-
-This application uses the **Client Credentials Flow** (2-legged OAuth). 
-
-Because it posts to a Company Page on behalf of the application itself, no Access Token or Refresh Token is needed! The `LINKEDIN_CLIENT_ID` and `LINKEDIN_CLIENT_SECRET` are all that is required to authenticate. This means you never have to manually renew any tokens.
-
-## 🚑 Common Troubleshooting
-
-- **504 Gateway Timeout on Vercel:** OpenRouter latency is high. The application gracefully aborted to prevent crashing. It will try again on the next cron run.
-- **Duplicate Images:** Ensure `per_page=1` is maintained in `lib/pexels.ts`.
-- **Unauthorized on Manual Run:** Double check that the password entered exactly matches the `MANUAL_RUN_SECRET` in Vercel.
+## 📄 License
+This project is open-source and available under the [MIT License](LICENSE).
