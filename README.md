@@ -57,7 +57,6 @@ curl -X POST http://localhost:3000/api/cron \
 - `PEXELS_API_KEY`
 - `LINKEDIN_CLIENT_ID`
 - `LINKEDIN_CLIENT_SECRET`
-- `LINKEDIN_REFRESH_TOKEN`
 - `LINKEDIN_ORGANIZATION_ID`
 
 ---
@@ -79,17 +78,11 @@ The `.github/workflows/cron.yml` file will automatically start pinging your app 
 
 ---
 
-## 🔐 LinkedIn OAuth Refresh Instructions
+## 🔐 LinkedIn Authentication
 
-Your `LINKEDIN_REFRESH_TOKEN` has a strict lifespan of **1 year**. 
+This application uses the **Client Credentials Flow** (2-legged OAuth). 
 
-If the application begins failing with `401 Unauthorized` errors from LinkedIn, your refresh token has expired.
-
-**To renew:**
-1. Generate a new Authorization Code from the LinkedIn Developer Portal.
-2. Exchange the Authorization Code for a new Access Token and Refresh Token.
-3. Update the `LINKEDIN_REFRESH_TOKEN` in your Vercel Environment Variables.
-4. Redeploy Vercel to apply the new environment variable.
+Because it posts to a Company Page on behalf of the application itself, no Access Token or Refresh Token is needed! The `LINKEDIN_CLIENT_ID` and `LINKEDIN_CLIENT_SECRET` are all that is required to authenticate. This means you never have to manually renew any tokens.
 
 ## 🚑 Common Troubleshooting
 
