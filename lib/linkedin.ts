@@ -67,7 +67,7 @@ export async function uploadAndPublishPost(postContent: string, imageBuffer: Buf
       "Authorization": `Bearer ${validAccessToken}`,
       "Content-Type": "application/octet-stream",
     },
-    body: imageBuffer,
+    body: imageBuffer as any,
   });
 
   if (!uploadRes.ok) {
