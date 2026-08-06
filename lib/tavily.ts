@@ -16,7 +16,7 @@ export async function getArticles(): Promise<Article[]> {
       query: "(trending startup OR trending AI startup OR startup funding OR venture capital OR Series A OR Series B OR acquisition OR IPO OR startup launch OR founder news OR startup ecosystem) AND (United States OR USA OR Canada OR United Kingdom OR UK OR Australia)",
       topic: "news",
       search_depth: "advanced",
-      time_range: "week",
+      days: 2,
       max_results: 30,
       include_answer: true,
       include_raw_content: false,
