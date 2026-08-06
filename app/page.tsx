@@ -27,16 +27,56 @@ export default function Home() {
         },
         body: JSON.stringify({ password }),
       });
-      const data = await res.json();
 
-      if (data.logs) setLogs(data.logs);
-
-      if (res.ok) {
-        setStatus("success");
-        setLastRun(new Date().toLocaleString());
-      } else {
+      if (!res.ok) {
+        let errMessage = "Unknown error";
+        try {
+            const data = await res.json();
+            errMessage = data.error || errMessage;
+        } catch(e) {}
         setStatus("error");
-        setLogs((prev) => [...prev, `Error: ${data.error || "Unknown error"}`]);
+        setLogs((prev) => [...prev, `Error: ${errMessage}`]);
+        return;
+      }
+
+      if (!res.body) {
+        throw new Error("No response body returned from server.");
+      }
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let done = false;
+
+      while (!done) {
+        const { value, done: readerDone } = await reader.read();
+        done = readerDone;
+
+        if (value) {
+          const chunk = decoder.decode(value, { stream: !done });
+          const lines = chunk.split('\n');
+          
+          for (const line of lines) {
+            if (line.startsWith('data: ')) {
+              try {
+                const data = JSON.parse(line.slice(6));
+                
+                if (data.log) {
+                  setLogs((prev) => [...prev, data.log]);
+                }
+                if (data.error) {
+                  setStatus("error");
+                  setLogs((prev) => [...prev, `Error: ${data.error}`]);
+                }
+                if (data.success) {
+                  setStatus("success");
+                  setLastRun(new Date().toLocaleString());
+                }
+              } catch (e) {
+                // Ignore incomplete JSON parsing errors
+              }
+            }
+          }
+        }
       }
     } catch (err: any) {
       setStatus("error");
