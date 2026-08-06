@@ -2,11 +2,11 @@ name: LinkedIn Auto Poster Cron
 
 on:
   schedule:
-    - cron: '0 13 * * *'
-    - cron: '0 16 * * *'
-    - cron: '0 18 * * *'
-    - cron: '0 20 * * *'
-    - cron: '0 22 * * *'
+    - cron: '0 12 * * *' # 8:00 AM ET (EDT = UTC-4)
+    - cron: '0 14 * * *' # 10:00 AM ET
+    - cron: '0 16 * * *' # 12:00 PM ET
+    - cron: '0 18 * * *' # 2:00 PM ET
+    - cron: '0 21 * * *' # 5:00 PM ET
   workflow_dispatch: # Allows manual triggering from the GitHub UI if needed
 
 jobs:
