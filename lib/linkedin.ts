@@ -3,20 +3,22 @@ import { fetchWithRetry } from "./utils";
 export async function uploadAndPublishPost(postContent: string, imageBuffer: Buffer) {
   const clientId = process.env.LINKEDIN_CLIENT_ID;
   const clientSecret = process.env.LINKEDIN_CLIENT_SECRET;
+  const refreshToken = process.env.LINKEDIN_REFRESH_TOKEN;
   const orgId = process.env.LINKEDIN_ORGANIZATION_ID;
 
-  if (!clientId || !clientSecret || !orgId) {
+  if (!clientId || !clientSecret || !refreshToken || !orgId) {
     throw new Error("LinkedIn credentials are not fully set");
   }
 
-  // 1. Get Access Token via Client Credentials Flow
+  // 1. Get Access Token via Refresh Token Flow (3-legged OAuth required for Organization posting)
   const tokenRes = await fetchWithRetry("https://www.linkedin.com/oauth/v2/accessToken", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
     body: new URLSearchParams({
-      grant_type: "client_credentials",
+      grant_type: "refresh_token",
+      refresh_token: refreshToken,
       client_id: clientId,
       client_secret: clientSecret,
     }),
