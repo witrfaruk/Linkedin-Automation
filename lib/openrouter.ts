@@ -32,6 +32,10 @@ async function callOpenRouter(systemPrompt: string, userPrompt: string, expectJs
     body.response_format = { type: "json_object" };
   }
 
+  // Create a 90-second timeout so the script doesn't hang forever if the API gets stuck
+  const timeoutSignal = AbortSignal.timeout(90000);
+  const fetchSignal = signal ? AbortSignal.any([signal, timeoutSignal]) : timeoutSignal;
+
   try {
     const response = await fetchWithRetry("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
@@ -42,7 +46,7 @@ async function callOpenRouter(systemPrompt: string, userPrompt: string, expectJs
         "X-Title": "LinkedIn Auto Poster",
       },
       body: JSON.stringify(body),
-      signal,
+      signal: fetchSignal,
     });
 
     if (!response.ok) {
