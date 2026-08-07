@@ -1,12 +1,27 @@
 import { fetchWithRetry } from "./utils";
 import { Article } from "./tavily";
 
-async function callOpenRouter(systemPrompt: string, userPrompt: string, expectJson: boolean = false, signal?: AbortSignal, retries = 3): Promise<string> {
+const FREE_MODELS = [
+  "nvidia/nemotron-3-ultra-550b-a55b:free",
+  "meta-llama/llama-3.1-8b-instruct:free",
+  "google/gemma-2-9b-it:free",
+  "mistralai/mistral-7b-instruct:free",
+  "qwen/qwen-2-7b-instruct:free"
+];
+
+async function callOpenRouter(systemPrompt: string, userPrompt: string, expectJson: boolean = false, signal?: AbortSignal, modelIndex = 0): Promise<string> {
   const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) throw new Error("OPENROUTER_API_KEY is not set");
 
+  if (modelIndex >= FREE_MODELS.length) {
+    throw new Error("All fallback models failed. Please try again later.");
+  }
+
+  const currentModel = FREE_MODELS[modelIndex];
+  console.log(`[OpenRouter] Using model: ${currentModel}`);
+
   const body: any = {
-    model: "nvidia/nemotron-3-ultra-550b-a55b:free",
+    model: currentModel,
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt }
@@ -54,12 +69,8 @@ async function callOpenRouter(systemPrompt: string, userPrompt: string, expectJs
 
     return content;
   } catch (error) {
-    if (retries > 0) {
-      console.warn(`callOpenRouter encountered error: ${(error as Error).message}. Retrying... (${retries} attempts left)`);
-      await new Promise(r => setTimeout(r, 2000));
-      return callOpenRouter(systemPrompt, userPrompt, expectJson, signal, retries - 1);
-    }
-    throw error;
+    console.warn(`[OpenRouter] Error with model ${currentModel}: ${(error as Error).message}. Falling back to next model...`);
+    return callOpenRouter(systemPrompt, userPrompt, expectJson, signal, modelIndex + 1);
   }
 }
 
