@@ -3,10 +3,8 @@ import { Article } from "./tavily";
 
 const FREE_MODELS = [
   "nvidia/nemotron-3-ultra-550b-a55b:free",
-  "meta-llama/llama-3.1-8b-instruct:free",
-  "google/gemma-2-9b-it:free",
-  "mistralai/mistral-7b-instruct:free",
-  "qwen/qwen-2-7b-instruct:free"
+  "meta-llama/llama-3-8b-instruct:free",
+  "openrouter/free"
 ];
 
 async function callOpenRouter(systemPrompt: string, userPrompt: string, expectJson: boolean = false, signal?: AbortSignal, modelIndex = 0): Promise<string> {
