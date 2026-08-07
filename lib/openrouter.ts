@@ -36,6 +36,7 @@ async function callOpenRouter(systemPrompt: string, userPrompt: string, expectJs
 
   const data = await response.json();
   if (!data.choices || data.choices.length === 0) {
+    console.error("OpenRouter empty choices error. Full response:", JSON.stringify(data, null, 2));
     throw new Error("OpenRouter returned empty choices array");
   }
 
