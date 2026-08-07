@@ -1,7 +1,7 @@
 import { fetchWithRetry } from "./utils";
 import { Article } from "./tavily";
 
-async function callOpenRouter(systemPrompt: string, userPrompt: string, expectJson: boolean = false, signal?: AbortSignal) {
+async function callOpenRouter(systemPrompt: string, userPrompt: string, expectJson: boolean = false, signal?: AbortSignal, retries = 3): Promise<string> {
   const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) throw new Error("OPENROUTER_API_KEY is not set");
 
@@ -17,37 +17,52 @@ async function callOpenRouter(systemPrompt: string, userPrompt: string, expectJs
     body.response_format = { type: "json_object" };
   }
 
-  const response = await fetchWithRetry("https://openrouter.ai/api/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-      "HTTP-Referer": "https://linkedin-auto-poster.vercel.app",
-      "X-Title": "LinkedIn Auto Poster",
-    },
-    body: JSON.stringify(body),
-    signal,
-  });
+  try {
+    const response = await fetchWithRetry("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://linkedin-auto-poster.vercel.app",
+        "X-Title": "LinkedIn Auto Poster",
+      },
+      body: JSON.stringify(body),
+      signal,
+    });
 
-  if (!response.ok) {
-    const errText = await response.text();
-    throw new Error(`OpenRouter API error: ${response.statusText} - ${errText}`);
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(`OpenRouter API error: ${response.statusText} - ${errText}`);
+    }
+
+    const data = await response.json();
+    
+    if (data.error) {
+      throw new Error(`OpenRouter returned error in JSON: ${JSON.stringify(data.error)}`);
+    }
+    
+    if (!data.choices || data.choices.length === 0) {
+      console.error("OpenRouter empty choices error. Full response:", JSON.stringify(data, null, 2));
+      throw new Error("OpenRouter returned empty choices array");
+    }
+
+    let content = data.choices[0].message.content.trim();
+    
+    if (expectJson) {
+      content = content.replace(/^```json\n/, '').replace(/\n```$/, '');
+    }
+
+    return content;
+  } catch (error) {
+    if (retries > 0) {
+      console.warn(`callOpenRouter encountered error: ${(error as Error).message}. Retrying... (${retries} attempts left)`);
+      await new Promise(r => setTimeout(r, 2000));
+      return callOpenRouter(systemPrompt, userPrompt, expectJson, signal, retries - 1);
+    }
+    throw error;
   }
-
-  const data = await response.json();
-  if (!data.choices || data.choices.length === 0) {
-    console.error("OpenRouter empty choices error. Full response:", JSON.stringify(data, null, 2));
-    throw new Error("OpenRouter returned empty choices array");
-  }
-
-  let content = data.choices[0].message.content.trim();
-  
-  if (expectJson) {
-    content = content.replace(/^```json\n/, '').replace(/\n```$/, '');
-  }
-
-  return content;
 }
+
 
 export async function chooseBestArticle(articles: Article[], signal?: AbortSignal) {
   const formattedArticles = articles.map((a, i) => `[Article ${i}]\nTitle: ${a.title}\nContent: ${a.content}\nURL: ${a.url}\nPublished: ${a.published_date || 'N/A'}`).join('\n\n');
