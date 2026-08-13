@@ -1,83 +1,89 @@
 # 🤖 LinkedIn Auto Poster
 
 <p align="center">
+  <img src="./assets/linkedin-auto-poster.svg" alt="LinkedIn Auto Poster animated banner" width="100%">
+</p>
+
+<p align="center">
   <strong>Build your personal brand while you sleep. 🚀</strong>
 </p>
 
 <p align="center">
-  An autonomous, AI-powered LinkedIn content engine that discovers startup news, turns it into founder-focused insights, generates visuals, and publishes directly to LinkedIn.
+  An autonomous AI content engine that discovers startup news, turns it into founder-focused insights, generates visuals, and publishes directly to LinkedIn.
 </p>
 
 <p align="center">
   <a href="#-how-it-works">How It Works</a> •
   <a href="#-ai-stack">AI Stack</a> •
-  <a href="#-getting-started">Getting Started</a> •
-  <a href="#-github-actions">GitHub Actions</a> •
+  <a href="#-setup">Setup</a> •
+  <a href="#-automation">Automation</a> •
   <a href="#-why-open-source">Why Open Source</a>
 </p>
 
 ---
 
-## 🚀 What Is This?
+## ⚡ What This Does
 
-**LinkedIn Auto Poster** is a fully autonomous AI-driven content automation system built to help individuals and companies consistently build their presence on LinkedIn.
+**LinkedIn Auto Poster** automates the repetitive parts of building a professional presence online.
 
-It automatically:
+```text
+📰 Discover
+   ↓
+🧠 Analyze
+   ↓
+✍️ Write
+   ↓
+🎨 Generate
+   ↓
+📢 Publish
+   ↓
+🔁 Repeat
+```
 
-> 📰 Finds what's happening
-> → 🧠 Understands what's important
-> → ✍️ Writes the post
-> → 🎨 Generates an image
-> → 📢 Publishes to LinkedIn
-> → 🔁 Repeats automatically
-
-No manual content research.
-
-No sitting down every morning wondering what to post.
-
-No complicated server infrastructure.
-
-Just connect your APIs, configure GitHub Actions, and let it run.
+The entire workflow can run automatically through **GitHub Actions**, without keeping a server running.
 
 ---
 
-## 🌟 Why I Built This
+## 🌍 Why I Built This
 
-Building a personal brand online takes **consistency**.
+Building a personal brand takes consistency.
 
-The problem is that most people don't have the time to:
+But consistency is difficult when you also have to:
 
-* Follow dozens of startup publications
-* Read hundreds of articles
-* Find the most interesting story
+* Read dozens of news articles
+* Find the story that actually matters
 * Understand why it matters
-* Write a high-quality LinkedIn post
-* Find or create a relevant image
-* Publish consistently every day
+* Write a useful post
+* Create a visual
+* Publish it
+* Repeat the process every day
 
-So I built an automation that handles the entire workflow.
+I wanted to automate the boring parts while keeping the important part — **your ideas, your expertise, and your voice**.
 
-### ❤️ Why I'm Open-Sourcing It
+### ❤️ Why I'm Making It Open Source
 
-I'm releasing this project openly because I believe **everyone should have the opportunity to build their personal brand online**.
+I'm releasing this project because I believe **more people should be able to build their personal brand online**.
 
-You shouldn't need a large team or an expensive content agency to consistently share valuable ideas.
+You don't need a huge team.
 
-You can take this project, customize it for yourself, change the prompts, change the niche, connect your own LinkedIn account, and build your own automated content system.
+You don't need an expensive content agency.
 
-**Use it. Modify it. Learn from it. Build something better.**
+You don't need to spend hours every day searching for something to post.
+
+Take this project, change the prompts, change the niche, connect your own accounts, and build something that works for **you**.
+
+> **The goal isn't to automate people.
+> The goal is to give people more time to create.**
 
 ---
 
 # 🧠 How It Works
 
-The entire workflow runs automatically through **GitHub Actions**.
+## 01 — 📰 News Discovery
 
-### 1. 📰 News Curation
+**Tavily** searches the web for recent startup, technology, and business news.
 
-**Tavily** searches the web for recent startup and technology news.
-
-The system can look across sources such as:
+The workflow can search sources such as:
 
 * TechCrunch
 * Forbes
@@ -85,100 +91,123 @@ The system can look across sources such as:
 * a16z
 * Startup publications
 * Technology publications
-* Business news
+* Business publications
 
-Articles from approximately the last **48 hours** are collected for analysis.
+The system focuses on recent stories so the generated content stays relevant.
 
 ---
 
-### 2. 🧠 AI Evaluation
+## 02 — 🧠 AI Evaluation
 
-The collected articles are analyzed using **OpenAI models**.
+The collected articles are analyzed using **OpenAI**.
 
-The AI evaluates the stories based on factors such as:
+The AI looks for stories with strong potential for a founder-focused audience.
 
-* Relevance to founders
+It considers things like:
+
+* Relevance
 * Timeliness
-* Potential engagement
 * Business impact
-* Interestingness
+* Founder interest
 * Discussion potential
-* Value for a LinkedIn audience
+* Engagement potential
 
-The goal is not to post everything.
-
-The goal is to find **the one story worth talking about**.
+Instead of blindly posting every article, the workflow tries to identify the **best story worth discussing**.
 
 ---
 
-### 3. ✍️ AI Copywriting
+## 03 — ✍️ AI Copywriting
 
-Once the best story is selected, OpenAI transforms it into a professional LinkedIn post.
+Once a story is selected, **OpenAI** transforms it into a LinkedIn-ready post.
 
-The generated content is designed to be:
+The writing is designed to be:
 
-* Founder-focused
-* Easy to read
+* Professional
 * Conversational
+* Founder-focused
+* Easy to scan
 * High-retention
 * Insightful
-* Suitable for LinkedIn
-* Focused on adding value rather than simply repeating the news
+* Native to LinkedIn
+
+The goal is not simply to summarize the article.
+
+The goal is to turn the news into something **worth reading**.
 
 ---
 
-### 4. 🎨 AI Image Generation
+## 04 — 🎨 AI Image Generation
 
-Instead of relying on a random stock image, the system can generate a relevant visual for the post using **Google Gemini**.
+Visuals are generated using **Google Gemini**.
 
-The workflow determines the visual context required for the post and uses Gemini to create an appropriate image.
+The workflow determines what kind of visual fits the content and generates an image for the LinkedIn post.
 
-This makes the content feel much more original and brand-focused.
+This means the automation can produce a complete content package:
 
----
-
-## 🤖 AI Stack
-
-This project uses different AI services for different parts of the workflow.
-
-| Task                  | Technology     |
-| --------------------- | -------------- |
-| 📰 Web research       | Tavily         |
-| 🧠 Article analysis   | OpenAI         |
-| ✍️ Content generation | OpenAI         |
-| 🎨 Image generation   | Google Gemini  |
-| 📢 Publishing         | LinkedIn API   |
-| ⚙️ Automation         | GitHub Actions |
-
-### Why OpenAI?
-
-OpenAI handles the core intelligence of the system — from understanding the news to deciding what is worth sharing and turning it into useful LinkedIn content.
-
-### Why Gemini for Images?
-
-Image generation is handled separately using Gemini so the system can create visual content specifically for each post.
+```text
+📰 Story
+     +
+✍️ Post
+     +
+🎨 Visual
+     =
+📢 Ready to Publish
+```
 
 ---
 
-# 🎨 My Image Generation Model
+## 05 — 🔗 LinkedIn Publishing
 
-I've also open-sourced the image-generation project I use:
+The generated image and post are sent through the **LinkedIn API** and published to the configured LinkedIn Organization/Company Page.
 
-### 👉 [Image Generation](https://github.com/farukhetro/Image-Generation)
-
-The model/API setup provides a very large daily token allowance — approximately **100,000 tokens per day**, depending on the current model/provider limits.
-
-> ⚠️ This is a **token limit, not 100,000 images per day**.
-
-That distinction is important because image generation consumes tokens based on the model and generation settings.
-
-If you're building your own version of this project, you can use the image-generation repository as another starting point for creating visuals for your content.
+Once configured, the process can happen without manual intervention.
 
 ---
 
-# ⏰ When It Runs
+# 🤖 AI Stack
 
-The automation is scheduled using:
+| Job                 | Tool           |
+| ------------------- | -------------- |
+| 🔎 Web research     | Tavily         |
+| 🧠 Analysis         | OpenAI         |
+| ✍️ Copywriting      | OpenAI         |
+| 🎨 Image generation | Google Gemini  |
+| 📢 Publishing       | LinkedIn API   |
+| ⚙️ Scheduling       | GitHub Actions |
+
+### Why Multiple AI Services?
+
+Each part of the workflow has a different job.
+
+**OpenAI** handles the reasoning and writing.
+
+**Gemini** handles image generation.
+
+This keeps the system modular, so you can replace individual components with other models or providers.
+
+---
+
+# 🎨 Image Generation
+
+I also built and open-sourced the image-generation project used with this workflow.
+
+### 🔗 Image Generation
+
+https://github.com/farukhetro/Image-Generation
+
+The image-generation setup can provide approximately **100,000 tokens per day**, depending on the current provider/model limits.
+
+> ⚠️ **Important:** 100,000 tokens does **not** mean 100,000 images.
+>
+> Image generation consumes tokens based on the model, prompt, resolution, and generation settings.
+
+You can use the image-generation repository as a separate starting point for building your own AI visual workflow.
+
+---
+
+# ⏰ Automation Schedule
+
+The workflow is controlled by:
 
 ```text
 .github/workflows/cron.yml
@@ -186,7 +215,7 @@ The automation is scheduled using:
 
 The default schedule is designed around common LinkedIn engagement windows.
 
-### 🇺🇸 US Eastern Time (ET)
+### 🇺🇸 US Eastern Time
 
 ```text
 08:00 AM
@@ -196,45 +225,63 @@ The default schedule is designed around common LinkedIn engagement windows.
 05:00 PM
 ```
 
-That's up to **5 automated posts per day**.
+That's up to **5 automated runs per day**.
 
-You can easily change the schedule inside the GitHub Actions workflow.
+You can change the schedule inside the GitHub Actions workflow.
 
----
-
-# ☁️ GitHub Actions
-
-One of the best parts of this project is that you don't need to maintain a server.
-
-You don't need:
-
-* ❌ Vercel
-* ❌ AWS
-* ❌ VPS
-* ❌ Database
-* ❌ Always-running server
-
-The automation runs through **GitHub Actions**.
-
-Once configured, GitHub automatically starts the workflow according to your schedule.
+> ⚠️ GitHub Actions cron uses **UTC**, so convert the desired Eastern Time schedule appropriately for daylight-saving changes.
 
 ---
 
-# 🚀 Getting Started
+# ⚙️ Automation
+
+```text
+                 ┌──────────────────┐
+                 │   GitHub Actions │
+                 │    ⏰ Scheduler  │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │   🔎 Tavily      │
+                 │   Find News      │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │   🧠 OpenAI      │
+                 │ Analyze Stories  │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │   ✍️ OpenAI      │
+                 │  Write Content   │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │   🎨 Gemini      │
+                 │ Generate Image   │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │   🔗 LinkedIn    │
+                 │      Publish     │
+                 └──────────────────┘
+```
+
+---
+
+# 🚀 Setup
 
 ## 1. Clone the repository
 
 ```bash
 git clone https://github.com/farukhetro/Linkedin-automation.git
-```
-
-Then:
-
-```bash
 cd Linkedin-automation
 ```
-
----
 
 ## 2. Install dependencies
 
@@ -242,37 +289,32 @@ cd Linkedin-automation
 npm install
 ```
 
----
-
-## 3. Configure environment variables
-
-Copy the example environment file:
+## 3. Create your environment file
 
 ```bash
 cp .env.example .env.local
 ```
 
-Then add your API credentials.
+Then add your credentials.
 
 ---
 
-# 🔐 Required API Keys
+# 🔐 Environment Variables
 
-The project requires the following environment variables:
+The project requires credentials similar to:
 
-```text
-OPENAI_API_KEY
-TAVILY_API_KEY
-GEMINI_API_KEY
-LINKEDIN_CLIENT_ID
-LINKEDIN_CLIENT_SECRET
-LINKEDIN_ORGANIZATION_ID
-LINKEDIN_REFRESH_TOKEN
+```env
+OPENAI_API_KEY=
+TAVILY_API_KEY=
+GEMINI_API_KEY=
+
+LINKEDIN_CLIENT_ID=
+LINKEDIN_CLIENT_SECRET=
+LINKEDIN_ORGANIZATION_ID=
+LINKEDIN_REFRESH_TOKEN=
 ```
 
-Depending on your implementation, additional configuration may be required.
-
-**Never commit your `.env.local` file or API keys to GitHub.**
+> 🔒 **Never commit API keys, refresh tokens, or `.env.local` to GitHub.**
 
 ---
 
@@ -284,39 +326,50 @@ To manually test the automation:
 npm start
 ```
 
-This allows you to test the workflow locally before enabling the GitHub Actions automation.
+Running locally is recommended before enabling the scheduled workflow.
 
 ---
 
 # 🔑 LinkedIn Authentication
 
-LinkedIn requires OAuth credentials to publish content to an Organization/Company Page.
+LinkedIn requires OAuth credentials for publishing to an Organization/Company Page.
 
-If you need to generate a new refresh token, run:
+If your project includes the authentication generator, run:
 
 ```bash
 npm run auth
 ```
 
-Follow the instructions displayed in your terminal.
+Follow the instructions printed in your terminal.
 
-Once authentication is complete, add the generated credentials to your environment variables or GitHub repository secrets.
+After authentication, store your credentials securely in your environment variables or GitHub repository secrets.
 
 ---
 
-# ⚙️ Deploy with GitHub Actions
+# ☁️ Deploy With GitHub Actions
 
-After pushing the project to GitHub:
+You don't need:
 
-### 1. Open your repository
+* ❌ Vercel
+* ❌ AWS server
+* ❌ VPS
+* ❌ Database
+* ❌ Always-running server
+
+The automation can run through **GitHub Actions**.
+
+### Add Repository Secrets
 
 Go to:
 
-**Settings → Secrets and variables → Actions**
+```text
+Repository
+→ Settings
+→ Secrets and variables
+→ Actions
+```
 
-### 2. Add your secrets
-
-Add the required credentials:
+Add:
 
 ```text
 OPENAI_API_KEY
@@ -328,9 +381,7 @@ LINKEDIN_ORGANIZATION_ID
 LINKEDIN_REFRESH_TOKEN
 ```
 
-### 3. Push your workflow
-
-Make sure the workflow exists:
+Then make sure your workflow exists:
 
 ```text
 .github/
@@ -338,134 +389,97 @@ Make sure the workflow exists:
     └── cron.yml
 ```
 
-GitHub Actions will then automatically run the automation according to the configured schedule.
+GitHub will run the automation according to your schedule.
 
 ---
 
-# 🏗️ Automation Pipeline
+# 🎯 Make It Yours
 
-```text
-┌─────────────────────┐
-│   📰 Tavily Search  │
-└──────────┬──────────┘
-           ↓
-┌─────────────────────┐
-│  🧠 OpenAI Analysis │
-└──────────┬──────────┘
-           ↓
-┌─────────────────────┐
-│  ⭐ Best Story      │
-└──────────┬──────────┘
-           ↓
-┌─────────────────────┐
-│ ✍️ OpenAI Writing   │
-└──────────┬──────────┘
-           ↓
-┌─────────────────────┐
-│ 🎨 Gemini Image     │
-└──────────┬──────────┘
-           ↓
-┌─────────────────────┐
-│ 🔗 LinkedIn API     │
-└──────────┬──────────┘
-           ↓
-        🚀 POST
-```
+This project is a foundation.
 
-All of this can run automatically through GitHub Actions.
-
----
-
-# 💡 Customize It For Yourself
-
-This project isn't limited to startup news.
-
-You can modify the prompts and workflow to create content around almost any niche.
-
-For example:
+You can turn it into an automation for almost any niche.
 
 ### 👨‍💻 Developers
 
 ```text
-AI news
-Open-source projects
-Programming trends
+AI
+Open source
+Programming
 Developer tools
+Engineering
 ```
 
 ### 🚀 Founders
 
 ```text
-Startup news
+Startups
 Fundraising
 Product launches
 Business strategy
+Venture capital
 ```
 
 ### 📈 Marketing
 
 ```text
-Marketing trends
-Growth strategies
+Growth
+Marketing
+Branding
 Social media
-Brand building
+Customer acquisition
 ```
 
-### 🤖 AI
+### 🤖 AI Creators
 
 ```text
-AI research
-New models
 AI tools
+New models
+AI research
 AI startups
+Automation
 ```
 
 ### 💼 Personal Brand
 
-You can also completely change the workflow to create content around **your own expertise and interests**.
-
-That's where this project becomes much more powerful.
+Change the search topics, prompts, tone, sources, image style, and schedule to create content around **your own expertise**.
 
 ---
 
-# 🌍 Build Your Personal Brand
+# 🧩 Customization
 
-You don't need to copy the exact workflow.
-
-Use it as a foundation.
-
-Change:
-
-* 🔎 Search queries
-* 🧠 AI prompts
-* ✍️ Writing style
-* 🎨 Image style
-* ⏰ Posting schedule
-* 🎯 Target audience
-* 📚 Content sources
-* 🔗 LinkedIn destination
-
-Build an automation that sounds like **you**.
+| Component      | What You Can Change                   |
+| -------------- | ------------------------------------- |
+| 🔎 Research    | Sources and search queries            |
+| 🧠 AI          | Model and prompts                     |
+| ✍️ Writing     | Tone and content style                |
+| 🎨 Images      | Image model and visual style          |
+| ⏰ Schedule     | Posting frequency                     |
+| 🎯 Audience    | Founders, developers, marketers, etc. |
+| 📢 Destination | LinkedIn Organization/Page            |
+| 🏷️ Branding   | Your name, niche, and voice           |
 
 ---
 
 # ⚠️ Important
 
-This project is intended to help automate content creation and publishing.
+This project is designed to automate content workflows, not blindly publish low-quality AI content.
 
-You should always review your platform's API policies, content policies, and automation rules before deploying it.
+Before deploying it publicly:
 
-Also make sure the content you publish is accurate and adds genuine value.
+* Verify generated information.
+* Review your AI provider's policies.
+* Review LinkedIn's API and automation policies.
+* Respect copyright and attribution requirements.
+* Don't publish misleading or fabricated information.
+* Protect all API keys and OAuth credentials.
 
-**Automation should save time — not replace judgment.**
+> **Automation should save time — not replace judgment.**
 
 ---
 
 # 🤝 Contributing
 
 Contributions, improvements, issues, and ideas are welcome.
-
-If you have an idea that could make the automation better:
 
 1. Fork the repository.
 2. Create a new branch.
@@ -477,17 +491,17 @@ If you have an idea that could make the automation better:
 
 ---
 
-# ⭐ Support the Project
+# ⭐ Support
 
-If this project helps you build your personal brand, consider giving the repository a ⭐.
+If this project helps you build your personal brand, consider giving it a ⭐.
 
-It helps other people discover the project and motivates me to keep improving it.
+It helps other creators discover the project and motivates further development.
 
 ---
 
 # 📜 License
 
-This project is completely open-source under the **MIT License**.
+This project is open source under the **MIT License**.
 
 You are free to:
 
@@ -503,9 +517,9 @@ See the [`LICENSE`](LICENSE) file for the complete license.
 
 <p align="center">
 
-## 🚀 Build your brand. Automate the boring parts. Keep creating.
+## 🚀 Build Your Brand While You Sleep
 
-**Open source • AI powered • Fully automated**
+**Discover → Think → Write → Create → Publish**
 
 </p>
 
