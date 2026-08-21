@@ -226,6 +226,8 @@ No bullet points
 
 No numbered lists
 
+No em dashes (—) or en dashes (–)
+
 Avoid corporate jargon.
 
 Do not start with
@@ -250,15 +252,24 @@ Instead, begin with a bold observation, surprising fact from the reference, or a
 
 Structure
 
-Hook: 1-2 strong lines.
+Hook
 
-Insight: 3-5 short lines explaining what happened and why founders should care.
 
-Takeaway: 1-2 useful lines.
 
-Question: 1 short question to encourage comments.
 
-Maximum 220 words.
+Insight
+
+
+
+
+Takeaway
+
+
+
+
+Question
+
+Ideal length: ~100–150 words.
 
 Every sentence must add value.
 
