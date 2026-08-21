@@ -281,56 +281,30 @@ Return only the final LinkedIn post.`;
   return await callOpenRouter("You are the Head of Content at TechCrunch.", prompt, false, signal);
 }
 
-export async function generatePexelsKeyword(postContent: string, signal?: AbortSignal) {
-  const prompt = `You are an expert at selecting stock photography keywords.
+export async function validateLinkedInPost(postContent: string, signal?: AbortSignal) {
+  const prompt = `You are a strict editorial reviewer for a top-tier B2B SaaS publication.
+  
+Review the following LinkedIn post:
 
-Reference
-
+<post>
 ${postContent}
+</post>
 
-Your task is to identify ONE keyword that best represents the entire article.
+Evaluate if this post is truly engaging, high-quality, and worth publishing to a B2B SaaS audience.
+Does it provide real value, unique insight, or spark curiosity? Or is it generic, boring, fluff, or hallucinated?
 
-Rules
-
-Return only ONE word.
-
-The word must be the main business concept.
-
-Do not return a sentence.
-
-Do not return multiple words.
-
-Do not explain your answer.
-
-Choose a word that would find a professional stock photo on Pexels.
-
-Examples
-
-Funding
-Startup
-Acquisition
-Investment
-Robotics
-AI
-Datacenter
-Cloud
-Healthcare
-Finance
-Cybersecurity
-Infrastructure
-Manufacturing
-Logistics
-Energy
-Semiconductor
-Automation
-Software
-Biotech
-Construction
-
-Output ONLY the single word.`;
-
-  const result = await callOpenRouter("You are an expert at selecting stock photography keywords.", prompt, false, signal);
-  // Robust regex to extract the first actual word in case the model replies with conversational filler
-  const match = result.match(/[A-Za-z0-9]+/);
-  return match ? match[0].trim() : "Startup";
+Respond with ONLY valid JSON matching this exact format:
+{
+  "is_worth_it": true,
+  "reason": "Brief explanation of why it is or isn't worth publishing"
 }
+`;
+
+  const result = await callOpenRouter("You are a strict editorial reviewer.", prompt, true, signal);
+  try {
+    return JSON.parse(result);
+  } catch (e) {
+    return { is_worth_it: false, reason: "Failed to parse JSON from AI reviewer" };
+  }
+}
+

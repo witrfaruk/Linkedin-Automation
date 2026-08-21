@@ -1,7 +1,6 @@
 import { getArticles } from "../lib/tavily";
-import { chooseBestArticle, generateLinkedInPost, generatePexelsKeyword } from "../lib/openrouter";
-import { searchImages, downloadImageBuffer } from "../lib/pexels";
-import { uploadAndPublishPost } from "../lib/linkedin";
+import { chooseBestArticle, generateLinkedInPost, validateLinkedInPost } from "../lib/openrouter";
+import { publishPost } from "../lib/linkedin";
 import fs from "fs";
 import path from "path";
 
@@ -46,7 +45,6 @@ async function run() {
 
     log("Evaluating all articles via One Chooser AI in a single pass to find the absolute best...");
     
-    // No timeout limits inside GitHub Actions
     const result = await chooseBestArticle(newArticles);
     let parsed;
     try {
@@ -59,39 +57,48 @@ async function run() {
       throw new Error("One Chooser AI returned an invalid article index");
     }
 
-    const bestArticle = newArticles[parsed.best_article_index];
+    const bestArticleIndex = parsed.best_article_index;
+    const bestArticle = newArticles[bestArticleIndex];
     const enhancedContext = `Summary: ${parsed.summary}\nWhy it matters: ${parsed.why_it_matters}`;
     
     log(`Selected article: "${bestArticle.title}" with score ${parsed.viral_score}`);
 
-    log("Generating LinkedIn post via OpenRouter (Writer)...");
-    const postContent = await generateLinkedInPost(bestArticle, enhancedContext);
-    log("Post content generated.");
+    let postPublished = false;
+    let attempts = 0;
+    const MAX_ATTEMPTS = 2;
 
-    log("Generating Pexels keyword...");
-    const keyword = await generatePexelsKeyword(postContent);
-    log(`Generated keyword: ${keyword}`);
+    while (attempts < MAX_ATTEMPTS && !postPublished) {
+      attempts++;
+      log(`Attempt ${attempts} of ${MAX_ATTEMPTS}: Generating LinkedIn post via OpenRouter (Writer)...`);
+      const postContent = await generateLinkedInPost(bestArticle, enhancedContext);
+      log("Post content generated.");
 
-    log("Searching exactly 1 image from Pexels...");
-    const images = await searchImages(keyword);
-    const bestImage = images[0];
+      log("Validating generated post via OpenRouter (Reviewer)...");
+      const validation = await validateLinkedInPost(postContent);
+      log(`Validation result: ${validation.is_worth_it ? "APPROVED" : "REJECTED"} - ${validation.reason}`);
 
-    log("Downloading image buffer...");
-    let imageBuffer: Buffer | null = await downloadImageBuffer(bestImage.src.large);
+      if (validation.is_worth_it) {
+        log("Publishing to LinkedIn...");
+        const postId = await publishPost(postContent);
+        
+        log(`Successfully published to LinkedIn! Post ID: ${postId}`);
 
-    log("Uploading image and publishing to LinkedIn...");
-    const postId = await uploadAndPublishPost(postContent, imageBuffer);
-    
-    imageBuffer = null;
-    
-    log(`Successfully published to LinkedIn! Post ID: ${postId}`);
-
-    if (!fs.existsSync(path.dirname(historyPath))) {
-      fs.mkdirSync(path.dirname(historyPath), { recursive: true });
+        if (!fs.existsSync(path.dirname(historyPath))) {
+          fs.mkdirSync(path.dirname(historyPath), { recursive: true });
+        }
+        history.push({ url: bestArticle.url, content: postContent, timestamp: Date.now() } as any);
+        fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
+        log("Saved article URL, post content, and timestamp to history.json to prevent duplicate posts within 24 hours.");
+        postPublished = true;
+      } else {
+        log(`Post was rejected by AI. (Attempt ${attempts} failed)`);
+      }
     }
-    history.push({ url: bestArticle.url, timestamp: Date.now() });
-    fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
-    log("Saved article URL and timestamp to history.json to prevent duplicate posts within 24 hours.");
+
+    if (!postPublished) {
+      log("All rewrite attempts failed the AI review. Exiting workflow for this run. Will try again on the next scheduled run.");
+      process.exit(0);
+    }
 
   } catch (error: any) {
     log(`Error: ${(error as Error).message}`);

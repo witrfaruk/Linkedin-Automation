@@ -2,11 +2,11 @@ name: LinkedIn Auto Poster Cron
 
 on:
   schedule:
-    - cron: '0 12 * * *' # 8:00 AM ET (EDT = UTC-4)
-    - cron: '0 14 * * *' # 10:00 AM ET
-    - cron: '0 16 * * *' # 12:00 PM ET
-    - cron: '0 18 * * *' # 2:00 PM ET
-    - cron: '0 21 * * *' # 5:00 PM ET
+    - cron: '50 8 * * *'  # 4:50 AM ET (EDT = UTC-4)
+    - cron: '59 16 * * *' # 12:59 PM ET
+    - cron: '45 20 * * *' # 4:45 PM ET
+    - cron: '45 23 * * *' # 7:45 PM ET
+    - cron: '7 1 * * *'   # 9:07 PM ET
   workflow_dispatch: # Allows manual triggering from the GitHub UI if needed
 
 jobs:
@@ -29,7 +29,6 @@ jobs:
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
-          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
           LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
           LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}

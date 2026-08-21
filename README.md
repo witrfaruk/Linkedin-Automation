@@ -467,9 +467,8 @@ After pushing the repository to GitHub:
 Add:
 
 ```text
-OPENAI_API_KEY
+OPENROUTER_API_KEY
 TAVILY_API_KEY
-GEMINI_API_KEY
 LINKEDIN_CLIENT_ID
 LINKEDIN_CLIENT_SECRET
 LINKEDIN_ORGANIZATION_ID
@@ -541,7 +540,10 @@ Have an idea?
 
 # ⭐ Support
 
-If this project helps you build your personal brand:
+If this project helps you build your personal brand, you can support us!
+
+If you want to support development and send us a present, you can do so here:
+**[👉 Send a Present via PayPal](https://www.paypal.com/paypalme/arifpayment)**
 
 <p align="center">
 
