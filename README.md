@@ -124,9 +124,9 @@ Turns the selected story into a professional, founder-focused LinkedIn post.
 </td>
 <td>
 
-### 🎨 AI Image Generation
+### 🧐 AI Validation & Auto-Retry
 
-Uses **Google Gemini** to create a visual relevant to the generated content.
+A strict AI editor reviews the draft. If it's too generic or boring, the system automatically forces a rewrite to guarantee high-quality posts.
 
 </td>
 </tr>
@@ -157,8 +157,6 @@ Runs automatically using **GitHub Actions** — no server required.
 
 <img src="https://img.shields.io/badge/OpenAI-Analysis%20%26%20Writing-412991?style=for-the-badge&logo=openai&logoColor=white" alt="OpenAI">
 
-<img src="https://img.shields.io/badge/Google%20Gemini-Image%20Generation-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Google Gemini">
-
 <img src="https://img.shields.io/badge/Tavily-Web%20Research-111827?style=for-the-badge" alt="Tavily">
 
 <img src="https://img.shields.io/badge/LinkedIn-Publishing-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
@@ -170,7 +168,7 @@ Runs automatically using **GitHub Actions** — no server required.
 | 🔎 Web research       | **Tavily**         |
 | 🧠 Article analysis   | **OpenAI**         |
 | ✍️ Content generation | **OpenAI**         |
-| 🎨 Image generation   | **Google Gemini**  |
+| 🧐 Content validation  | **OpenAI**         |
 | 📢 Publishing         | **LinkedIn API**   |
 | ⏰ Automation          | **GitHub Actions** |
 
@@ -233,31 +231,21 @@ It's to turn the information into something **useful for your audience**.
 
 ---
 
-## 04 — 🎨 Create
+## 04 — 🧐 Validate & Rewrite
 
-Google Gemini generates a relevant image for the post.
+The drafted post is sent to a strict **AI Reviewer**. 
 
-The result becomes:
+If the post is deemed too generic, full of fluff, or hallucinates facts, the reviewer rejects it. The system then automatically restarts the drafting process for that exact article to try again.
 
-```text
-📰 News
-+
-🧠 Insight
-+
-✍️ Post
-+
-🎨 Visual
-```
-
-A complete LinkedIn content package.
+Only truly engaging, high-quality posts survive the filter.
 
 ---
 
 ## 05 — 📢 Publish
 
-The generated post and image are sent through the LinkedIn API.
+The validated, text-only post is sent through the LinkedIn API.
 
-The content can then be published automatically to the configured LinkedIn Organization/Company Page.
+The content is published automatically to your configured LinkedIn Organization or Profile.
 
 ---
 
