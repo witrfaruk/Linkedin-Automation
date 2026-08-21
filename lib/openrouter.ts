@@ -250,15 +250,13 @@ Instead, begin with a bold observation, surprising fact from the reference, or a
 
 Structure
 
-Open with a powerful hook.
+Hook: 1-2 strong lines.
 
-Explain what happened.
+Insight: 3-5 short lines explaining what happened and why founders should care.
 
-Explain why founders should care.
+Takeaway: 1-2 useful lines.
 
-Explain the broader business or market implication.
-
-End with one concise practical founder takeaway.
+Question: 1 short question to encourage comments.
 
 Maximum 220 words.
 
@@ -280,31 +278,3 @@ Return only the final LinkedIn post.`;
 
   return await callOpenRouter("You are the Head of Content at TechCrunch.", prompt, false, signal);
 }
-
-export async function validateLinkedInPost(postContent: string, signal?: AbortSignal) {
-  const prompt = `You are a strict editorial reviewer for a top-tier B2B SaaS publication.
-  
-Review the following LinkedIn post:
-
-<post>
-${postContent}
-</post>
-
-Evaluate if this post is truly engaging, high-quality, and worth publishing to a B2B SaaS audience.
-Does it provide real value, unique insight, or spark curiosity? Or is it generic, boring, fluff, or hallucinated?
-
-Respond with ONLY valid JSON matching this exact format:
-{
-  "is_worth_it": true,
-  "reason": "Brief explanation of why it is or isn't worth publishing"
-}
-`;
-
-  const result = await callOpenRouter("You are a strict editorial reviewer.", prompt, true, signal);
-  try {
-    return JSON.parse(result);
-  } catch (e) {
-    return { is_worth_it: false, reason: "Failed to parse JSON from AI reviewer" };
-  }
-}
-

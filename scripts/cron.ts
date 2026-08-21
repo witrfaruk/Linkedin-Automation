@@ -1,5 +1,5 @@
 import { getArticles } from "../lib/tavily";
-import { chooseBestArticle, generateLinkedInPost, validateLinkedInPost } from "../lib/openrouter";
+import { chooseBestArticle, generateLinkedInPost } from "../lib/openrouter";
 import { publishPost } from "../lib/linkedin";
 import fs from "fs";
 import path from "path";
@@ -63,42 +63,21 @@ async function run() {
     
     log(`Selected article: "${bestArticle.title}" with score ${parsed.viral_score}`);
 
-    let postPublished = false;
-    let attempts = 0;
-    const MAX_ATTEMPTS = 2;
+    log("Generating LinkedIn post via OpenRouter (Writer)...");
+    const postContent = await generateLinkedInPost(bestArticle, enhancedContext);
+    log("Post content generated.");
 
-    while (attempts < MAX_ATTEMPTS && !postPublished) {
-      attempts++;
-      log(`Attempt ${attempts} of ${MAX_ATTEMPTS}: Generating LinkedIn post via OpenRouter (Writer)...`);
-      const postContent = await generateLinkedInPost(bestArticle, enhancedContext);
-      log("Post content generated.");
+    log("Publishing to LinkedIn...");
+    const postId = await publishPost(postContent);
+    
+    log(`Successfully published to LinkedIn! Post ID: ${postId}`);
 
-      log("Validating generated post via OpenRouter (Reviewer)...");
-      const validation = await validateLinkedInPost(postContent);
-      log(`Validation result: ${validation.is_worth_it ? "APPROVED" : "REJECTED"} - ${validation.reason}`);
-
-      if (validation.is_worth_it) {
-        log("Publishing to LinkedIn...");
-        const postId = await publishPost(postContent);
-        
-        log(`Successfully published to LinkedIn! Post ID: ${postId}`);
-
-        if (!fs.existsSync(path.dirname(historyPath))) {
-          fs.mkdirSync(path.dirname(historyPath), { recursive: true });
-        }
-        history.push({ url: bestArticle.url, content: postContent, timestamp: Date.now() } as any);
-        fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
-        log("Saved article URL, post content, and timestamp to history.json to prevent duplicate posts within 24 hours.");
-        postPublished = true;
-      } else {
-        log(`Post was rejected by AI. (Attempt ${attempts} failed)`);
-      }
+    if (!fs.existsSync(path.dirname(historyPath))) {
+      fs.mkdirSync(path.dirname(historyPath), { recursive: true });
     }
-
-    if (!postPublished) {
-      log("All rewrite attempts failed the AI review. Exiting workflow for this run. Will try again on the next scheduled run.");
-      process.exit(0);
-    }
+    history.push({ url: bestArticle.url, content: postContent, timestamp: Date.now() } as any);
+    fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
+    log("Saved article URL, post content, and timestamp to history.json to prevent duplicate posts within 24 hours.");
 
   } catch (error: any) {
     log(`Error: ${(error as Error).message}`);
