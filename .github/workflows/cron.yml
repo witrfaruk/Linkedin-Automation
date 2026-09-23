@@ -27,8 +27,14 @@ jobs:
       - name: Run Automation Script
         run: npx tsx scripts/cron.ts
         env:
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ secrets.ANTHROPIC_MODEL || vars.ANTHROPIC_MODEL }}
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          SEARCH_QUERY: ${{ secrets.SEARCH_QUERY || vars.SEARCH_QUERY }}
+          INCLUDE_DOMAINS: ${{ secrets.INCLUDE_DOMAINS || vars.INCLUDE_DOMAINS }}
+          EXCLUDE_DOMAINS: ${{ secrets.EXCLUDE_DOMAINS || vars.EXCLUDE_DOMAINS }}
+          SEARCH_DAYS: ${{ secrets.SEARCH_DAYS || vars.SEARCH_DAYS }}
+          SEARCH_MAX_RESULTS: ${{ secrets.SEARCH_MAX_RESULTS || vars.SEARCH_MAX_RESULTS }}
           LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
           LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
           LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}

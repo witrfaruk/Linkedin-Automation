@@ -1,5 +1,5 @@
 import { getArticles } from "../lib/tavily";
-import { chooseBestArticle, generateLinkedInPost } from "../lib/openrouter";
+import { chooseBestArticle, generateLinkedInPost } from "../lib/claude";
 import { publishPost } from "../lib/linkedin";
 import fs from "fs";
 import path from "path";
@@ -10,7 +10,7 @@ async function run() {
   };
 
   try {
-    log("Fetching top 30 articles via Tavily...");
+    log(`Fetching articles via Tavily (Query: "${process.env.SEARCH_QUERY || ''}")...`);
     const articles = await getArticles();
     log(`Fetched ${articles.length} articles.`);
 
@@ -43,18 +43,18 @@ async function run() {
       process.exit(0);
     }
 
-    log("Evaluating all articles via One Chooser AI in a single pass to find the absolute best...");
+    log("Evaluating all articles via Claude (Chooser) to find the single best story...");
     
     const result = await chooseBestArticle(newArticles);
     let parsed;
     try {
       parsed = JSON.parse(result);
     } catch(e) {
-      throw new Error("One Chooser AI failed to return valid JSON");
+      throw new Error("Claude Chooser failed to return valid JSON");
     }
 
     if (parsed.best_article_index === undefined || parsed.best_article_index < 0 || parsed.best_article_index >= newArticles.length) {
-      throw new Error("One Chooser AI returned an invalid article index");
+      throw new Error("Claude Chooser returned an invalid article index");
     }
 
     const bestArticleIndex = parsed.best_article_index;
@@ -63,7 +63,7 @@ async function run() {
     
     log(`Selected article: "${bestArticle.title}" with score ${parsed.viral_score}`);
 
-    log("Generating LinkedIn post via OpenRouter (Writer)...");
+    log("Generating LinkedIn post via Claude (Writer)...");
     const postContent = await generateLinkedInPost(bestArticle, enhancedContext);
     log("Post content generated.");
 

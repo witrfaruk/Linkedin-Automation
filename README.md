@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=20&duration=2800&pause=900&color=60A5FA&center=true&vCenter=true&width=700&lines=Build+your+personal+brand+while+you+sleep+%F0%9F%9A%80;Discover+%E2%86%92+Analyze+%E2%86%92+Write+%E2%86%92+Create+%E2%86%92+Publish;Fully+automated+AI-powered+LinkedIn+content;Powered+by+OpenAI+%2B+Gemini+%2B+Tavily" alt="Typing animation">
+  <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=20&duration=2800&pause=900&color=60A5FA&center=true&vCenter=true&width=700&lines=Build+your+personal+brand+while+you+sleep+%F0%9F%9A%80;Discover+%E2%86%92+Analyze+%E2%86%92+Write+%E2%86%92+Publish;Fully+automated+AI-powered+LinkedIn+content;Powered+by+Anthropic+Claude+%2B+Tavily" alt="Typing animation">
 </p>
 
 <p align="center">
@@ -109,7 +109,7 @@ Searches recent startup, technology, and business news using **Tavily**.
 
 ### 🧠 AI Story Selection
 
-Uses **OpenAI** to determine which story has the strongest value and engagement potential.
+Uses **Anthropic Claude (`claude-fable-5-1`)** to determine which story has the strongest value and engagement potential.
 
 </td>
 </tr>
@@ -155,7 +155,7 @@ Runs automatically using **GitHub Actions** — no server required.
 
 <p align="center">
 
-<img src="https://img.shields.io/badge/OpenAI-Analysis%20%26%20Writing-412991?style=for-the-badge&logo=openai&logoColor=white" alt="OpenAI">
+<img src="https://img.shields.io/badge/Anthropic-Claude%20Fable-D97706?style=for-the-badge&logo=anthropic&logoColor=white" alt="Anthropic Claude">
 
 <img src="https://img.shields.io/badge/Tavily-Web%20Research-111827?style=for-the-badge" alt="Tavily">
 
@@ -166,9 +166,8 @@ Runs automatically using **GitHub Actions** — no server required.
 | Purpose               | Technology         |
 | --------------------- | ------------------ |
 | 🔎 Web research       | **Tavily**         |
-| 🧠 Article analysis   | **OpenAI**         |
-| ✍️ Content generation | **OpenAI**         |
-| 🧐 Content validation  | **OpenAI**         |
+| 🧠 Article analysis   | **Anthropic Claude** (`claude-fable-5-1`) |
+| ✍️ Content generation | **Anthropic Claude** (`claude-fable-5-1`) |
 | 📢 Publishing         | **LinkedIn API**   |
 | ⏰ Automation          | **GitHub Actions** |
 
@@ -176,76 +175,48 @@ Runs automatically using **GitHub Actions** — no server required.
 
 # 🔄 How It Works
 
-## 01 — 🔎 Discover
+## 01 — 🔎 Discover (Insert Your Search Query & Sources!)
 
-Tavily searches the web for recent startup and technology stories.
+Buddy, there are no locked-down or predefined sources! You insert your own search query and domain filters in `.env` (or GitHub Secrets) so we can start:
 
-The system can search sources such as:
-
-* TechCrunch
-* Forbes
-* Y Combinator
-* a16z
-* Startup publications
-* Technology publications
-* Business publications
+* **Your Niche / Query**: Set `SEARCH_QUERY` to whatever topic you want (e.g. AI, Crypto, Finance, Engineering, Healthcare, Real Estate).
+* **Your Sources (Optional)**: Set `INCLUDE_DOMAINS` to your favorite publications or leave it empty to search the entire web.
+* **Filter Out Noise (Optional)**: Set `EXCLUDE_DOMAINS` to block any websites you don't like.
 
 ---
 
-## 02 — 🧠 Think
+## 02 — 🧠 Think & Choose (Insert Your Selection Prompt!)
 
-The collected articles are passed to **OpenAI**.
+The fetched articles are evaluated using **Anthropic Claude (`claude-fable-5-1`)**.
 
-The AI evaluates:
+Buddy, you insert your own detailed evaluation prompt inside [`lib/claude.ts`](lib/claude.ts) so Claude knows exactly what kind of stories to look for:
 
 ```text
-✓ Relevance
-✓ Timeliness
-✓ Founder interest
-✓ Business impact
-✓ Discussion potential
-✓ Engagement potential
+✓ Relevance to your specific niche
+✓ High discussion and engagement value
+✓ Timeliness and credibility
+✓ Unique insights that your audience cares about
 ```
 
-Instead of posting everything, the system attempts to find the **one story worth talking about**.
+Instead of spamming everything, Claude picks the **single best story** according to your instructions.
 
 ---
 
-## 03 — ✍️ Write
+## 03 — ✍️ Write & Style (Insert Your Writing Prompt!)
 
-OpenAI transforms the selected story into a LinkedIn post.
+Claude transforms the selected story into an engaging LinkedIn post tailored to your brand.
 
-The generated content aims to be:
+Buddy, open [`lib/claude.ts`](lib/claude.ts) and insert your own detailed writing prompt, tone guidelines, and structure:
 
-* Professional
-* Conversational
-* Founder-focused
-* Easy to scan
-* Insightful
-* High-retention
-* Native to LinkedIn
-
-The objective isn't to copy the article.
-
-It's to turn the information into something **useful for your audience**.
+* Set your own voice (conversational, authoritative, bold, technical, etc.)
+* Define your ideal post length and structure
+* Add your rules on formatting, hooks, and questions
 
 ---
 
-## 04 — 🧐 Validate & Rewrite
+## 04 — 📢 Publish
 
-The drafted post is sent to a strict **AI Reviewer**. 
-
-If the post is deemed too generic, full of fluff, or hallucinates facts, the reviewer rejects it. The system then automatically restarts the drafting process for that exact article to try again.
-
-Only truly engaging, high-quality posts survive the filter.
-
----
-
-## 05 — 📢 Publish
-
-The validated, text-only post is sent through the LinkedIn API.
-
-The content is published automatically to your configured LinkedIn Organization or Profile.
+The generated LinkedIn post is published automatically through the **LinkedIn API** to your personal profile or organization page.
 
 ---
 
@@ -411,12 +382,19 @@ npm install
 cp .env.example .env.local
 ```
 
-Then configure:
+Then configure `.env.local`:
 
 ```env
-OPENAI_API_KEY=
+ANTHROPIC_API_KEY=
+ANTHROPIC_MODEL=claude-fable-5-1 # Optional
 TAVILY_API_KEY=
-GEMINI_API_KEY=
+
+# Define your niche topic or search keywords (Required)
+SEARCH_QUERY="Artificial Intelligence OR Machine Learning OR LLMs"
+
+# Specific domains to include/exclude (Optional)
+INCLUDE_DOMAINS=
+EXCLUDE_DOMAINS=
 
 LINKEDIN_CLIENT_ID=
 LINKEDIN_CLIENT_SECRET=
@@ -455,8 +433,12 @@ After pushing the repository to GitHub:
 Add:
 
 ```text
-OPENROUTER_API_KEY
+ANTHROPIC_API_KEY
+ANTHROPIC_MODEL (optional, defaults to claude-fable-5-1)
 TAVILY_API_KEY
+SEARCH_QUERY
+INCLUDE_DOMAINS (optional)
+EXCLUDE_DOMAINS (optional)
 LINKEDIN_CLIENT_ID
 LINKEDIN_CLIENT_SECRET
 LINKEDIN_ORGANIZATION_ID
