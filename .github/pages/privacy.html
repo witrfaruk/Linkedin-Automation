@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — LinkedIn Automation</title>
+  <meta name="description" content="Privacy Policy for LinkedIn Automation. Learn how our open-source tool protects your privacy and API credentials.">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-link" id="nav-brand">
+        <img src="assets/logo.png" alt="LinkedIn Automation Logo" class="header-logo">
+      </a>
+
+      <button class="mobile-toggle" aria-label="Toggle navigation menu" id="mobileMenuBtn">☰</button>
+
+      <nav class="nav-menu" id="navMenu">
+        <button type="button" class="nav-btn" data-target="how-to-use-section">How to Use</button>
+        <button type="button" class="nav-btn" data-target="requirements-section">Requirements</button>
+        <a href="https://ko-fi.com/U4B028M2CY" target="_blank" rel="noopener noreferrer" class="btn btn-kofi btn-sm">
+          ☕ Support Us
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main style="padding: 4.5rem 0;">
+    <div class="container">
+      <div class="legal-box">
+        <div style="text-align: center; margin-bottom: 2.5rem;">
+          <div class="badge-brutal dismissible-pill">
+            <span>🛡️ Transparency & Safety</span>
+            <button type="button" class="pill-remove-btn" aria-label="Dismiss badge" title="Dismiss">×</button>
+          </div>
+          <h1 style="font-size: 2.75rem; margin-bottom: 0.5rem;">Privacy Policy</h1>
+          <p style="font-weight: 700;">Last Updated: October 2026 • 100% Open Source</p>
+        </div>
+
+        <h2>1. Overview & Core Philosophy</h2>
+        <p>
+          <strong>LinkedIn Automation</strong> is an open-source, self-hosted automation software designed for developers, founders, and creators. We firmly believe in complete user privacy.
+        </p>
+        <p>
+          <strong>We do not operate centralized backend tracking servers, we do not monitor your posts, and we do not collect personal analytics.</strong> The automation executes exclusively on your local computer or inside your personal GitHub Actions cloud runner under your direct control.
+        </p>
+
+        <h2>2. Data We Do NOT Collect</h2>
+        <p>Because the project is entirely self-hosted, the maintainers and contributors have zero access to:</p>
+        <ul>
+          <li><strong>API Credentials:</strong> Your Anthropic Claude API keys, Tavily Search keys, and LinkedIn Developer client credentials are never transmitted to us or any fourth party.</li>
+          <li><strong>LinkedIn Account Content:</strong> Your personal profile details, published posts, engagement metrics, and network are private to your LinkedIn account.</li>
+          <li><strong>Tracking & Telemetry:</strong> There is zero telemetry, tracking cookies, advertising pixels, or diagnostic reporting built into this repository.</li>
+        </ul>
+
+        <h2>3. Third-Party Services</h2>
+        <p>
+          LinkedIn Automation connects directly to the following official third-party APIs using the credentials you configure:
+        </p>
+        <ul>
+          <li>
+            <strong>Anthropic (Claude API):</strong> Used for article evaluation and high-converting copy generation. API requests adhere to the <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener noreferrer">Anthropic Privacy Policy</a>. Commercial API requests are never used to train frontier models.
+          </li>
+          <li>
+            <strong>Tavily Search API:</strong> Used to search and retrieve real-time tech news without noise. Subject to the <a href="https://tavily.com" target="_blank" rel="noopener noreferrer">Tavily Privacy Policy</a>.
+          </li>
+          <li>
+            <strong>LinkedIn Developer Platform:</strong> Used to publish posts to your LinkedIn page via official OAuth 2.0 authorization, complying with the <a href="https://www.linkedin.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">LinkedIn Privacy Policy</a>.
+          </li>
+          <li>
+            <strong>GitHub Actions & GitHub Pages:</strong> The execution environment and documentation hosting are managed by GitHub under the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub Privacy Statement</a>.
+          </li>
+        </ul>
+
+        <h2>4. GitHub Secrets & Credential Protection</h2>
+        <p>
+          When deploying the automation on GitHub Actions, your API keys and tokens are stored in <strong>Encrypted GitHub Secrets</strong>. GitHub encrypts secrets using Libsodium sealed boxes before storage and automatically masks them from console workflow logs.
+        </p>
+        <p>
+          We strongly advise users to:
+        </p>
+        <ul>
+          <li>Never commit <code>.env</code> or <code>.env.local</code> files to public Git branches.</li>
+          <li>Regularly review LinkedIn Developer App permissions and revoke tokens when not in use.</li>
+          <li>Set hard spending limits on your Anthropic and Tavily dashboards.</li>
+        </ul>
+
+        <h2>5. Local Storage & History</h2>
+        <p>
+          The application saves a lightweight <code>history.json</code> file to track articles published within the last 24 hours to prevent duplicate posts. This file stays purely within your runtime environment and is ignored by Git.
+        </p>
+
+        <h2>6. Support & Donations (Ko-fi)</h2>
+        <p>
+          If you support this open-source project via our <a href="https://ko-fi.com/U4B028M2CY" target="_blank" rel="noopener noreferrer">Ko-fi page</a>, payment transactions are handled securely by Ko-fi and their certified payment gateways (PayPal / Stripe). We never see or store your payment details.
+        </p>
+
+        <h2>7. Contact & Questions</h2>
+        <p>
+          If you have any questions or security concerns regarding this policy, reach out through our <a href="contact.html">Contact Page</a> or file an issue on our official <a href="https://github.com/farukhetro/Linkedin-automation/issues" target="_blank" rel="noopener noreferrer">GitHub Repository</a>.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html">
+            <img src="assets/logo.png" alt="LinkedIn Automation Logo" class="footer-logo">
+          </a>
+          <p style="font-weight: 600; margin-top: 0.75rem;">
+            Autonomous AI-powered LinkedIn content pipeline. Discover, analyze, draft, and publish on autopilot.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><button type="button" data-target="how-to-use-section">How to Use</button></li>
+            <li><button type="button" data-target="requirements-section">Requirements</button></li>
+            <li><a href="https://ko-fi.com/U4B028M2CY" target="_blank" rel="noopener noreferrer">Support Us</a></li>
+            <li><a href="https://github.com/farukhetro/Linkedin-automation" target="_blank" rel="noopener noreferrer">GitHub Repo</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Pages & Legal</h4>
+          <ul>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="https://ko-fi.com/U4B028M2CY" target="_blank" rel="noopener noreferrer">Support on Ko-fi</a></li>
+            <li><a href="https://github.com/farukhetro/Linkedin-automation/issues" target="_blank" rel="noopener noreferrer">Report an Issue</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Sponsor Us</h4>
+          <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem;">
+            Keep this project actively maintained with free upgrades.
+          </p>
+          <a href="https://ko-fi.com/U4B028M2CY" target="_blank" rel="noopener noreferrer" class="btn btn-kofi btn-sm">
+            ☕ Donate via Ko-fi
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 LinkedIn Automation. Open-source under MIT License.</div>
+        <div>Built with Neo-Brutalism & ❤️ for developers worldwide.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

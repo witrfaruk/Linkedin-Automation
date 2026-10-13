@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — LinkedIn Automation</title>
+  <meta name="description" content="Get in touch with the LinkedIn Automation team for support, feature requests, or collaboration.">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-link" id="nav-brand">
+        <img src="assets/logo.png" alt="LinkedIn Automation Logo" class="header-logo">
+      </a>
+
+      <button class="mobile-toggle" aria-label="Toggle navigation menu" id="mobileMenuBtn">☰</button>
+
+      <nav class="nav-menu" id="navMenu">
+        <button type="button" class="nav-btn" data-target="how-to-use-section">How to Use</button>
+        <button type="button" class="nav-btn" data-target="requirements-section">Requirements</button>
+        <a href="https://ko-fi.com/U4B028M2CY" target="_blank" rel="noopener noreferrer" class="btn btn-kofi btn-sm">
+          ☕ Support Us
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main style="padding: 4.5rem 0;">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div class="badge-brutal dismissible-pill">
+          <span>💬 Get In Touch</span>
+          <button type="button" class="pill-remove-btn" aria-label="Dismiss badge" title="Dismiss">×</button>
+        </div>
+        <h2>Contact & Support</h2>
+        <p>Have questions, encountered an issue, or want to contribute? Reach out directly!</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; max-width: 1050px; margin: 0 auto;">
+        <div class="form-card">
+          <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem;">Send a Message</h3>
+          <p style="margin-bottom: 1.5rem; font-weight: 600;">We'll get back to you as soon as possible.</p>
+
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="contactName">Your Name</label>
+              <input type="text" id="contactName" class="brutal-input" placeholder="e.g. Alex Morgan" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contactEmail">Email Address</label>
+              <input type="email" id="contactEmail" class="brutal-input" placeholder="alex@domain.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contactSubject">Inquiry Category</label>
+              <select id="contactSubject" class="brutal-input" required>
+                <option value="" disabled selected>Choose a category...</option>
+                <option value="setup">Setup & Credentials Help</option>
+                <option value="bug">Bug Report / Automation Issue</option>
+                <option value="feature">Feature Request / Model Integration</option>
+                <option value="collab">Collaboration & Open Source</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="contactMessage">Message</label>
+              <textarea id="contactMessage" class="brutal-input" placeholder="How can we assist you with LinkedIn Automation?" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.95rem; font-size: 1.05rem;" id="sendBtn">
+              ⚡ Send Message
+            </button>
+          </form>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <div class="brutal-card">
+            <div class="brutal-card-header">
+              <div class="card-stamp yellow">🐛</div>
+            </div>
+            <h3>GitHub Issues</h3>
+            <p style="margin-bottom: 1.25rem;">Found a bug or need code troubleshooting? Create an issue on our official GitHub repository.</p>
+            <a href="https://github.com/farukhetro/Linkedin-automation/issues" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+              Open an Issue &rarr;
+            </a>
+          </div>
+
+          <div class="brutal-card">
+            <div class="brutal-card-header">
+              <div class="card-stamp pink">☕</div>
+            </div>
+            <h3>Support on Ko-fi</h3>
+            <p style="margin-bottom: 1.25rem;">Support the creator directly to sponsor server costs and continuous free open-source updates.</p>
+            <a href="https://ko-fi.com/U4B028M2CY" target="_blank" rel="noopener noreferrer" class="btn btn-kofi btn-sm">
+              Donate on Ko-fi &rarr;
+            </a>
+          </div>
+
+          <div class="brutal-card">
+            <div class="brutal-card-header">
+              <div class="card-stamp blue">💡</div>
+            </div>
+            <h3>Discussions & Strategy</h3>
+            <p style="margin-bottom: 1.25rem;">Connect with creators using autonomous agents to grow their personal brands and audience.</p>
+            <a href="https://github.com/farukhetro/Linkedin-automation/discussions" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+              Join Discussions &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html">
+            <img src="assets/logo.png" alt="LinkedIn Automation Logo" class="footer-logo">
+          </a>
+          <p style="font-weight: 600; margin-top: 0.75rem;">
+            Autonomous AI-powered LinkedIn content pipeline. Discover, analyze, draft, and publish on autopilot.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><button type="button" data-target="how-to-use-section">How to Use</button></li>
+            <li><button type="button" data-target="requirements-section">Requirements</button></li>
+            <li><a href="https://ko-fi.com/U4B028M2CY" target="_blank" rel="noopener noreferrer">Support Us</a></li>
+            <li><a href="https://github.com/farukhetro/Linkedin-automation" target="_blank" rel="noopener noreferrer">GitHub Repo</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Pages & Legal</h4>
+          <ul>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="https://ko-fi.com/U4B028M2CY" target="_blank" rel="noopener noreferrer">Support on Ko-fi</a></li>
+            <li><a href="https://github.com/farukhetro/Linkedin-automation/issues" target="_blank" rel="noopener noreferrer">Report an Issue</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Sponsor Us</h4>
+          <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem;">
+            Keep this project actively maintained with free upgrades.
+          </p>
+          <a href="https://ko-fi.com/U4B028M2CY" target="_blank" rel="noopener noreferrer" class="btn btn-kofi btn-sm">
+            ☕ Donate via Ko-fi
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 LinkedIn Automation. Open-source under MIT License.</div>
+        <div>Built with Neo-Brutalism & ❤️ for developers worldwide.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

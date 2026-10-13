@@ -1,8 +1,13 @@
 import fs from 'fs';
+import path from 'path';
 import http from 'http';
 
-// 1. Read credentials manually from .env.local so we don't need any extra dependencies
-const envFile = fs.readFileSync('.env.local', 'utf-8');
+const envCandidates = [
+  path.resolve(process.cwd(), '.env.local'),
+  path.resolve(process.cwd(), '..', '.env.local'),
+];
+const envPath = envCandidates.find((p) => fs.existsSync(p)) || envCandidates[0];
+const envFile = fs.existsSync(envPath) ? fs.readFileSync(envPath, 'utf-8') : '';
 let CLIENT_ID = '';
 let CLIENT_SECRET = '';
 
@@ -17,8 +22,6 @@ if (!CLIENT_ID || !CLIENT_SECRET) {
 }
 
 const REDIRECT_URI = "http://localhost:3000/callback";
-
-// 2. We request the specific scopes needed to post to an organization
 const SCOPE = "openid profile email w_organization_social w_member_social"; 
 
 const authUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&state=123456&scope=${encodeURIComponent(SCOPE)}`;
@@ -38,7 +41,6 @@ console.log("Click this link (or copy-paste it into your browser) to log in to L
 console.log(authUrl + "\n");
 console.log("Waiting for you to log in in your browser...\n");
 
-// 3. Start local server to catch the redirect
 const server = http.createServer(async (req, res) => {
   const reqUrl = new URL(req.url || '', `http://localhost:3000`);
   
@@ -93,5 +95,4 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(3000, () => {
-  // Server is running and waiting
 });

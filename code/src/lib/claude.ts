@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import { fetchWithRetry } from "./utils";
 import { Article } from "./tavily";
 
@@ -39,7 +41,6 @@ async function callClaude(
     ],
   };
 
-  // 90-second timeout
   const timeoutSignal = AbortSignal.timeout(90000);
   const fetchSignal = signal ? AbortSignal.any([signal, timeoutSignal]) : timeoutSignal;
 
@@ -93,10 +94,47 @@ async function callClaude(
   }
 }
 
-// =========================================================================
-// PROMPT 1: ARTICLE EVALUATOR / CHOOSER
-// =========================================================================
-// (Buddy, insert your detailed prompt so we can start!!!!)
+export function formatSkillsContext(): string {
+  const possibleDirs = [
+    path.resolve(process.cwd(), "..", "skills"),
+    path.resolve(process.cwd(), "skills"),
+    path.resolve(__dirname, "../../../skills"),
+  ];
+
+  const skillsDir = possibleDirs.find((d) => fs.existsSync(d) && fs.statSync(d).isDirectory());
+  if (!skillsDir) return "";
+
+  const files = fs.readdirSync(skillsDir).filter((f) => !f.startsWith("."));
+  if (files.length === 0) return "";
+
+  let skillsContent = "";
+  for (const file of files) {
+    const fullPath = path.join(skillsDir, file);
+    try {
+      const stats = fs.statSync(fullPath);
+      if (stats.isFile()) {
+        const raw = fs.readFileSync(fullPath, "utf-8").trim();
+        if (raw) {
+          if (file.endsWith(".json")) {
+            try {
+              const parsed = JSON.parse(raw);
+              skillsContent += `\n[Skills Config (${file})]:\n${JSON.stringify(parsed, null, 2)}\n`;
+            } catch {
+              skillsContent += `\n[Skills File (${file})]:\n${raw}\n`;
+            }
+          } else {
+            skillsContent += `\n[Skills File (${file})]:\n${raw}\n`;
+          }
+        }
+      }
+    } catch {
+    }
+  }
+
+  if (!skillsContent.trim()) return "";
+  return `\nAuthor Custom Skills & Guidelines:\n${skillsContent.trim()}\n`;
+}
+
 export async function chooseBestArticle(articles: Article[], signal?: AbortSignal) {
   const formattedArticles = articles
     .map(
@@ -107,13 +145,13 @@ export async function chooseBestArticle(articles: Article[], signal?: AbortSigna
     )
     .join("\n\n");
 
-  const prompt = `(insert your detailed prompt so we can start!!!!)
+  const skillsContext = formatSkillsContext();
 
-Here are ${articles.length} news articles:
+  const prompt = `Here are ${articles.length} news articles:
 
 ${formattedArticles}
 
-Evaluate the articles and select the single best story with highest value, discussion, and engagement potential.
+Evaluate the articles and select the single best story with highest value, discussion, and engagement potential.${skillsContext ? `\n\nEnsure the selected article strongly aligns with the author's expertise and focus topics:${skillsContext}` : ""}
 
 Output ONLY valid JSON matching this exact format:
 
@@ -127,10 +165,6 @@ Output ONLY valid JSON matching this exact format:
   return await callClaude("You are an executive editorial director.", prompt, true, signal);
 }
 
-// =========================================================================
-// PROMPT 2: LINKEDIN POST GENERATOR / WRITER
-// =========================================================================
-// (Buddy, insert your detailed prompt so we can start!!!!)
 export async function generateLinkedInPost(
   article: Article,
   enhancedContext?: string,
@@ -141,14 +175,14 @@ export async function generateLinkedInPost(
     reference = `${enhancedContext}\n\nOriginal Content:\n${article.content}`;
   }
 
-  const prompt = `(insert your detailed prompt so we can start!!!!)
+  const skillsContext = formatSkillsContext();
 
-Reference:
+  const prompt = `Reference Article:
 <article>
 ${reference}
 </article>
-
-Transform the reference article above into an engaging, high-retention LinkedIn post.
+${skillsContext ? `\nAuthor Profile & Post Guidelines:${skillsContext}\n` : ""}
+Transform the reference article above into an engaging, high-retention LinkedIn post reflecting the author's skills, tone, and formatting guidelines.
 
 Output ONLY the final LinkedIn post as plain text. Do not wrap in markdown or JSON.`;
 

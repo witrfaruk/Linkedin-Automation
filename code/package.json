@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "npx tsx scripts/cron.ts",
-    "auth": "npx tsx scripts/get-linkedin-token.ts"
+    "start": "npx tsx src/scripts/cron.ts",
+    "auth": "npx tsx src/scripts/get-linkedin-token.ts"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

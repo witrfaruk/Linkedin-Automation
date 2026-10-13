@@ -7,7 +7,6 @@ export async function fetchWithRetry(
   try {
     const response = await fetch(url, options);
     
-    // Retry on 5xx errors or 429 Too Many Requests
     if (!response.ok && (response.status >= 500 || response.status === 429)) {
       if (retries > 0) {
         console.warn(`Fetch failed (${response.status}) for ${url}. Retrying in ${backoffMs}ms...`);
@@ -31,7 +30,6 @@ export function withTimeout(signal: AbortSignal, timeoutMs: number): AbortSignal
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
   
-  // If the parent signal aborts, abort our controller
   signal.addEventListener("abort", () => {
     clearTimeout(timeoutId);
     controller.abort();

@@ -10,7 +10,6 @@ export async function publishPost(postContent: string) {
     throw new Error("LinkedIn credentials are not fully set");
   }
 
-  // 1. Get Access Token via Refresh Token Flow (3-legged OAuth required for Organization posting)
   const tokenRes = await fetchWithRetry("https://www.linkedin.com/oauth/v2/accessToken", {
     method: "POST",
     headers: {

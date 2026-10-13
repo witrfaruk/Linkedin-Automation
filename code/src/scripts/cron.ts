@@ -18,17 +18,14 @@ async function run() {
     let history: { url: string, timestamp: number }[] = [];
     if (fs.existsSync(historyPath)) {
       const parsed = JSON.parse(fs.readFileSync(historyPath, "utf-8"));
-      // Handle backward compatibility if previous history was just an array of strings
       history = parsed.map((item: any) => 
         typeof item === "string" ? { url: item, timestamp: Date.now() } : item
       );
     }
 
-    // Keep only history from the last 24 hours
     const ONE_DAY_MS = 24 * 60 * 60 * 1000;
     history = history.filter(item => (Date.now() - item.timestamp) < ONE_DAY_MS);
 
-    // If history is completely empty after filtering out old posts, delete the file to keep project clean
     if (history.length === 0 && fs.existsSync(historyPath)) {
       fs.unlinkSync(historyPath);
       log("Deleted old history.json completely to prevent project size from growing.");
