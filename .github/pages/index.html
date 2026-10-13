@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LinkedIn Automation — Autonomous AI Content Engine & Scheduler</title>
-  <meta name="description" content="Discover trending tech news with Tavily, analyze insights with Claude Fable, draft punchy human-like posts, and publish directly to LinkedIn automatically with GitHub Actions. 100% free and open-source.">
-  <meta name="keywords" content="linkedin automation, ai linkedin poster, github actions cron, claude ai linkedin, open source linkedin bot, social media automation, tavily search, autonomous agent">
+  <meta name="description"
+    content="Discover trending tech news with Tavily, analyze insights with Claude Fable, draft punchy human-like posts, and publish directly to LinkedIn automatically with GitHub Actions. 100% free and open-source.">
+  <meta name="keywords"
+    content="linkedin automation, ai linkedin poster, github actions cron, claude ai linkedin, open source linkedin bot, social media automation, tavily search, autonomous agent">
   <meta name="author" content="Md Faruk Abdulla">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://witrfaruk.github.io/Linkedin-Automation/">
@@ -16,7 +19,8 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="LinkedIn Automation">
   <meta property="og:title" content="LinkedIn Automation — Autonomous AI Content Engine & Scheduler">
-  <meta property="og:description" content="Discover trending tech news with Tavily, analyze insights with Claude Fable, draft punchy posts, and publish to LinkedIn automatically with GitHub Actions.">
+  <meta property="og:description"
+    content="Discover trending tech news with Tavily, analyze insights with Claude Fable, draft punchy posts, and publish to LinkedIn automatically with GitHub Actions.">
   <meta property="og:url" content="https://witrfaruk.github.io/Linkedin-Automation/">
   <meta property="og:image" content="https://witrfaruk.github.io/Linkedin-Automation/assets/logo.png">
   <meta property="og:image:width" content="1200">
@@ -25,7 +29,8 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="LinkedIn Automation — Autonomous AI Content Engine">
-  <meta name="twitter:description" content="100% Free & Open-Source AI LinkedIn Auto-Poster running 24/7 on GitHub Actions.">
+  <meta name="twitter:description"
+    content="100% Free & Open-Source AI LinkedIn Auto-Poster running 24/7 on GitHub Actions.">
   <meta name="twitter:image" content="https://witrfaruk.github.io/Linkedin-Automation/assets/logo.png">
 
   <script type="application/ld+json">
@@ -99,6 +104,7 @@
   }
   </script>
 </head>
+
 <body>
 
   <header class="site-header">
@@ -122,9 +128,8 @@
   <main>
     <section class="hero-section">
       <div class="container">
-        <div class="badge-brutal dismissible-pill" id="heroBadge">
-          <span>⚡ 100% Free & Open-Source Autonomous Agent</span>
-          <button type="button" class="pill-remove-btn" aria-label="Dismiss badge" title="Dismiss">×</button>
+        <div class="badge-brutal">
+          ⚡ 100% Free & Open-Source Autonomous Agent
         </div>
 
         <h1 class="hero-title">
@@ -133,11 +138,13 @@
         </h1>
 
         <p class="hero-subtitle">
-          Autonomous AI engine that finds trending tech stories with Tavily, analyzes insights with Claude Fable, drafts punchy human-like posts, and publishes on schedule via GitHub Actions.
+          Autonomous AI engine that finds trending tech stories with Tavily, analyzes insights with Claude Fable, drafts
+          punchy human-like posts, and publishes on schedule via GitHub Actions.
         </p>
 
         <div class="hero-actions">
-          <a href="https://github.com/farukhetro/Linkedin-automation/archive/refs/heads/main.zip" class="btn btn-yellow download-zip-btn" download="Linkedin-automation-main.zip">
+          <a href="https://github.com/farukhetro/Linkedin-automation/archive/refs/heads/main.zip"
+            class="btn btn-yellow download-zip-btn" download="Linkedin-automation-main.zip">
             📦 Download ZIP
           </a>
           <button type="button" class="btn btn-primary" data-target="how-to-use-section">
@@ -192,53 +199,33 @@
           <p>Everything you need before running the automation. All services have generous free tiers!</p>
         </div>
 
-        <div class="filter-chips-container" id="filterChipsContainer">
-          <span class="filter-chips-label">Filter Requirements:</span>
-          <div class="filter-chips-list" id="activeFilterChips">
-            <span class="pill-chip active" data-filter="ai">
-              <span>🤖 AI Brain</span>
-              <button type="button" class="pill-remove-btn" aria-label="Remove AI Brain filter" title="Remove filter">×</button>
-            </span>
-            <span class="pill-chip active" data-filter="search">
-              <span>🔎 Search API</span>
-              <button type="button" class="pill-remove-btn" aria-label="Remove Search API filter" title="Remove filter">×</button>
-            </span>
-            <span class="pill-chip active" data-filter="oauth">
-              <span>🔗 Social OAuth</span>
-              <button type="button" class="pill-remove-btn" aria-label="Remove Social OAuth filter" title="Remove filter">×</button>
-            </span>
-            <span class="pill-chip active" data-filter="runner">
-              <span>⚡ Free Runner</span>
-              <button type="button" class="pill-remove-btn" aria-label="Remove Free Runner filter" title="Remove filter">×</button>
-            </span>
-          </div>
-          <button type="button" class="filter-reset-btn" id="resetFiltersBtn" style="display: none;">+ Restore Filters</button>
-        </div>
-
         <div class="card-grid" id="requirementsCardGrid">
-          <div class="brutal-card" data-category="ai">
+          <div class="brutal-card">
             <div class="brutal-card-header">
               <div class="card-stamp green">🤖</div>
-              <span class="badge-brutal dismissible-pill" style="margin: 0; font-size: 0.75rem;">AI Brain <button type="button" class="pill-remove-btn" aria-label="Dismiss tag" title="Dismiss">×</button></span>
+              <span class="badge-brutal" style="margin: 0; font-size: 0.75rem;">AI Brain</span>
             </div>
             <h3>1. Anthropic API Key</h3>
-            <p>Powers Claude Fable for selecting top stories and drafting high-retention content without generic AI fluff.</p>
+            <p>Powers Claude Fable for selecting top stories and drafting high-retention content without generic AI
+              fluff.</p>
             <div class="code-box">
               <div class="code-bar">
                 <span>Secret Key</span>
-                <button type="button" class="code-copy-btn copy-secret-btn" data-secret="ANTHROPIC_API_KEY">Copy</button>
+                <button type="button" class="code-copy-btn copy-secret-btn"
+                  data-secret="ANTHROPIC_API_KEY">Copy</button>
               </div>
               <pre><code>ANTHROPIC_API_KEY</code></pre>
             </div>
           </div>
 
-          <div class="brutal-card" data-category="search">
+          <div class="brutal-card">
             <div class="brutal-card-header">
               <div class="card-stamp blue">🔎</div>
-              <span class="badge-brutal dismissible-pill" style="margin: 0; font-size: 0.75rem;">Search API <button type="button" class="pill-remove-btn" aria-label="Dismiss tag" title="Dismiss">×</button></span>
+              <span class="badge-brutal" style="margin: 0; font-size: 0.75rem;">Search API</span>
             </div>
             <h3>2. Tavily Search API</h3>
-            <p>Real-time developer and AI search engine designed for autonomous agents. Grabs clean, high-signal articles.</p>
+            <p>Real-time developer and AI search engine designed for autonomous agents. Grabs clean, high-signal
+              articles.</p>
             <div class="code-box">
               <div class="code-bar">
                 <span>Secret Key</span>
@@ -248,38 +235,34 @@
             </div>
           </div>
 
-          <div class="brutal-card" data-category="oauth">
+          <div class="brutal-card">
             <div class="brutal-card-header">
               <div class="card-stamp yellow">🔗</div>
-              <span class="badge-brutal dismissible-pill" style="margin: 0; font-size: 0.75rem;">Social OAuth <button type="button" class="pill-remove-btn" aria-label="Dismiss tag" title="Dismiss">×</button></span>
+              <span class="badge-brutal" style="margin: 0; font-size: 0.75rem;">Social OAuth</span>
             </div>
             <h3>3. LinkedIn App Credentials</h3>
-            <p>Create a free app at the LinkedIn Developer Portal to get your Client ID, Secret, and long-lived Refresh Token.</p>
+            <p>Create a free app at the LinkedIn Developer Portal to get your Client ID, Secret, and long-lived Refresh
+              Token.</p>
             <div class="code-box">
               <div class="code-bar">
                 <span>Required OAuth Scopes</span>
                 <button type="button" class="code-copy-btn" data-copy-id="scopesCode">Copy</button>
               </div>
               <div class="code-scope-wrap" id="scopesCode">
-                <span class="scope-chip" data-scope="w_organization_social">
-                  <span>w_organization_social</span>
-                  <button type="button" class="pill-remove-btn" aria-label="Remove scope" title="Remove scope">×</button>
-                </span>
-                <span class="scope-chip" data-scope="w_member_social">
-                  <span>w_member_social</span>
-                  <button type="button" class="pill-remove-btn" aria-label="Remove scope" title="Remove scope">×</button>
-                </span>
+                <span class="scope-chip">w_organization_social</span>
+                <span class="scope-chip">w_member_social</span>
               </div>
             </div>
           </div>
 
-          <div class="brutal-card" data-category="runner">
+          <div class="brutal-card">
             <div class="brutal-card-header">
               <div class="card-stamp pink">⚡</div>
-              <span class="badge-brutal dismissible-pill" style="margin: 0; font-size: 0.75rem;">Free Runner <button type="button" class="pill-remove-btn" aria-label="Dismiss tag" title="Dismiss">×</button></span>
+              <span class="badge-brutal" style="margin: 0; font-size: 0.75rem;">Free Runner</span>
             </div>
             <h3>4. GitHub Actions Runner</h3>
-            <p>Zero hosting fees! GitHub Actions executes the cron job inside your repo completely free on Linux cloud runners.</p>
+            <p>Zero hosting fees! GitHub Actions executes the cron job inside your repo completely free on Linux cloud
+              runners.</p>
             <div class="code-box">
               <div class="code-bar">
                 <span>Runtime Environment</span>
@@ -287,11 +270,6 @@
               <pre><code>ubuntu-latest (Node 20)</code></pre>
             </div>
           </div>
-        </div>
-
-        <div class="filter-empty-state" id="filterEmptyState" style="display: none;">
-          <p>No requirements match your current filter selection.</p>
-          <button type="button" class="btn btn-yellow btn-sm" id="emptyResetBtn" style="margin-top: 0.75rem;">+ Restore All Filters</button>
         </div>
       </div>
     </section>
@@ -309,9 +287,11 @@
             <div class="step-badge">1</div>
             <div class="step-body">
               <h3>Clone Repository & Install Dependencies</h3>
-              <p>Download the repository ZIP or clone it, then install the fast dependencies inside <code>code/</code>:</p>
+              <p>Download the repository ZIP or clone it, then install the fast dependencies inside <code>code/</code>:
+              </p>
               <div style="margin: 0.75rem 0;">
-                <a href="https://github.com/farukhetro/Linkedin-automation/archive/refs/heads/main.zip" class="btn btn-yellow btn-sm download-zip-btn" download="Linkedin-automation-main.zip">
+                <a href="https://github.com/farukhetro/Linkedin-automation/archive/refs/heads/main.zip"
+                  class="btn btn-yellow btn-sm download-zip-btn" download="Linkedin-automation-main.zip">
                   📦 Download ZIP Archive
                 </a>
               </div>
@@ -331,7 +311,8 @@ npm install</code></pre>
             <div class="step-badge">2</div>
             <div class="step-body">
               <h3>Get LinkedIn OAuth Refresh Token</h3>
-              <p>Set your Client ID and Client Secret in <code>code/.env.local</code>, then run the built-in OAuth helper:</p>
+              <p>Set your Client ID and Client Secret in <code>code/.env.local</code>, then run the built-in OAuth
+                helper:</p>
               <div class="code-box">
                 <div class="code-bar">
                   <span>Terminal</span>
@@ -340,7 +321,8 @@ npm install</code></pre>
                 <pre><code>npm run auth</code></pre>
               </div>
               <p style="font-size: 0.9rem; font-weight: 600; color: #444; margin-top: 0.5rem;">
-                This launches a local callback server, authenticates via your browser, and prints your long-lived Refresh Token directly in your terminal.
+                This launches a local callback server, authenticates via your browser, and prints your long-lived
+                Refresh Token directly in your terminal.
               </p>
             </div>
           </div>
@@ -349,7 +331,9 @@ npm install</code></pre>
             <div class="step-badge">3</div>
             <div class="step-body">
               <h3>Customize Your Skills (Blank & Flexible)</h3>
-              <p>The root <code>skills/</code> folder is completely blank so you can add your own custom skills! Simply drop any <code>skills.txt</code>, <code>profile.json</code>, or markdown file into <code>skills/</code> and Claude will tailor every post to your unique tone and expertise.</p>
+              <p>The root <code>skills/</code> folder is completely blank so you can add your own custom skills! Simply
+                drop any <code>skills.txt</code>, <code>profile.json</code>, or markdown file into <code>skills/</code>
+                and Claude will tailor every post to your unique tone and expertise.</p>
             </div>
           </div>
 
@@ -357,7 +341,8 @@ npm install</code></pre>
             <div class="step-badge">4</div>
             <div class="step-body">
               <h3>Test The Automation Locally</h3>
-              <p>Trigger the end-to-end flow to fetch articles, analyze trends, write a post, and publish to LinkedIn:</p>
+              <p>Trigger the end-to-end flow to fetch articles, analyze trends, write a post, and publish to LinkedIn:
+              </p>
               <div class="code-box">
                 <div class="code-bar">
                   <span>Terminal</span>
@@ -381,7 +366,8 @@ npm install</code></pre>
 
         <div class="brutal-card" style="margin-bottom: 2.5rem;">
           <h3 style="font-size: 1.4rem; margin-bottom: 0.75rem;">GitHub Secrets Checklist</h3>
-          <p>Go to your GitHub repository: <strong>Settings &gt; Secrets and variables &gt; Actions &gt; New repository secret</strong>. Add the following secrets:</p>
+          <p>Go to your GitHub repository: <strong>Settings &gt; Secrets and variables &gt; Actions &gt; New repository
+              secret</strong>. Add the following secrets:</p>
 
           <div class="brutal-table-wrap">
             <table class="brutal-table">
@@ -396,32 +382,38 @@ npm install</code></pre>
                 <tr>
                   <td><span class="secret-tag">ANTHROPIC_API_KEY</span></td>
                   <td>Your Claude API Key</td>
-                  <td><button type="button" class="code-copy-btn copy-secret-btn" data-secret="ANTHROPIC_API_KEY">Copy</button></td>
+                  <td><button type="button" class="code-copy-btn copy-secret-btn"
+                      data-secret="ANTHROPIC_API_KEY">Copy</button></td>
                 </tr>
                 <tr>
                   <td><span class="secret-tag">TAVILY_API_KEY</span></td>
                   <td>Your Tavily Search API Key</td>
-                  <td><button type="button" class="code-copy-btn copy-secret-btn" data-secret="TAVILY_API_KEY">Copy</button></td>
+                  <td><button type="button" class="code-copy-btn copy-secret-btn"
+                      data-secret="TAVILY_API_KEY">Copy</button></td>
                 </tr>
                 <tr>
                   <td><span class="secret-tag">LINKEDIN_CLIENT_ID</span></td>
                   <td>LinkedIn Developer App Client ID</td>
-                  <td><button type="button" class="code-copy-btn copy-secret-btn" data-secret="LINKEDIN_CLIENT_ID">Copy</button></td>
+                  <td><button type="button" class="code-copy-btn copy-secret-btn"
+                      data-secret="LINKEDIN_CLIENT_ID">Copy</button></td>
                 </tr>
                 <tr>
                   <td><span class="secret-tag">LINKEDIN_CLIENT_SECRET</span></td>
                   <td>LinkedIn Developer App Client Secret</td>
-                  <td><button type="button" class="code-copy-btn copy-secret-btn" data-secret="LINKEDIN_CLIENT_SECRET">Copy</button></td>
+                  <td><button type="button" class="code-copy-btn copy-secret-btn"
+                      data-secret="LINKEDIN_CLIENT_SECRET">Copy</button></td>
                 </tr>
                 <tr>
                   <td><span class="secret-tag">LINKEDIN_REFRESH_TOKEN</span></td>
                   <td>Refresh Token from <code>npm run auth</code></td>
-                  <td><button type="button" class="code-copy-btn copy-secret-btn" data-secret="LINKEDIN_REFRESH_TOKEN">Copy</button></td>
+                  <td><button type="button" class="code-copy-btn copy-secret-btn"
+                      data-secret="LINKEDIN_REFRESH_TOKEN">Copy</button></td>
                 </tr>
                 <tr>
                   <td><span class="secret-tag">LINKEDIN_ORGANIZATION_ID</span></td>
                   <td>Your Company / Organization Page ID</td>
-                  <td><button type="button" class="code-copy-btn copy-secret-btn" data-secret="LINKEDIN_ORGANIZATION_ID">Copy</button></td>
+                  <td><button type="button" class="code-copy-btn copy-secret-btn"
+                      data-secret="LINKEDIN_ORGANIZATION_ID">Copy</button></td>
                 </tr>
               </tbody>
             </table>
@@ -476,7 +468,8 @@ npm install</code></pre>
             </div>
             <h3>What is LinkedIn Automation?</h3>
             <p>
-              It is an open-source autonomous agent that monitors real-time tech trends using Tavily Search, evaluates insights with Claude Fable AI, and schedules publication via GitHub Actions completely free.
+              It is an open-source autonomous agent that monitors real-time tech trends using Tavily Search, evaluates
+              insights with Claude Fable AI, and schedules publication via GitHub Actions completely free.
             </p>
           </div>
 
@@ -486,7 +479,8 @@ npm install</code></pre>
             </div>
             <h3>How much does it cost to run?</h3>
             <p>
-              100% free! GitHub Actions includes generous free cloud runner minutes, and all required APIs (Anthropic, Tavily, LinkedIn Developer) offer free tiers suitable for consistent posting.
+              100% free! GitHub Actions includes generous free cloud runner minutes, and all required APIs (Anthropic,
+              Tavily, LinkedIn Developer) offer free tiers suitable for consistent posting.
             </p>
           </div>
 
@@ -496,7 +490,8 @@ npm install</code></pre>
             </div>
             <h3>How does it avoid robotic AI fluff?</h3>
             <p>
-              The system analyzes your custom skills and tone from the <code>skills/</code> folder, scoring stories on technical substance and producing authentic, human-like copy without buzzwords.
+              The system analyzes your custom skills and tone from the <code>skills/</code> folder, scoring stories on
+              technical substance and producing authentic, human-like copy without buzzwords.
             </p>
           </div>
 
@@ -506,7 +501,8 @@ npm install</code></pre>
             </div>
             <h3>What credentials are required?</h3>
             <p>
-              You only need an Anthropic Claude API Key, Tavily Search API Key, and your LinkedIn Developer App credentials (Client ID, Client Secret, Refresh Token).
+              You only need an Anthropic Claude API Key, Tavily Search API Key, and your LinkedIn Developer App
+              credentials (Client ID, Client Secret, Refresh Token).
             </p>
           </div>
         </div>
@@ -518,13 +514,15 @@ npm install</code></pre>
         <div class="kofi-billboard">
           <h2>☕ Support Our Open-Source Project!</h2>
           <p>
-            This project is 100% free and open source. If it saves you hours of writing and research, consider buying us a coffee on Ko-fi to support continuous updates!
+            This project is 100% free and open source. If it saves you hours of writing and research, consider buying us
+            a coffee on Ko-fi to support continuous updates!
           </p>
           <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
             <a href="https://ko-fi.com/U4B028M2CY" target="_blank" rel="noopener noreferrer" class="btn btn-kofi-main">
               ☕ Buy Me a Coffee on Ko-fi
             </a>
-            <a href="https://github.com/farukhetro/Linkedin-automation" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size: 1.25rem; padding: 1rem 2rem;">
+            <a href="https://github.com/farukhetro/Linkedin-automation" target="_blank" rel="noopener noreferrer"
+              class="btn btn-outline" style="font-size: 1.25rem; padding: 1rem 2rem;">
               ⭐ Star on GitHub
             </a>
           </div>
@@ -552,7 +550,8 @@ npm install</code></pre>
             <li><button type="button" data-target="requirements-section">Requirements</button></li>
             <li><button type="button" data-target="faq-section">FAQ</button></li>
             <li><button type="button" data-target="support-section">Support Us</button></li>
-            <li><a href="https://github.com/farukhetro/Linkedin-automation" target="_blank" rel="noopener noreferrer">GitHub Repo</a></li>
+            <li><a href="https://github.com/farukhetro/Linkedin-automation" target="_blank"
+                rel="noopener noreferrer">GitHub Repo</a></li>
           </ul>
         </div>
 
@@ -561,8 +560,10 @@ npm install</code></pre>
           <ul>
             <li><a href="privacy.html">Privacy Policy</a></li>
             <li><a href="contact.html">Contact Us</a></li>
-            <li><a href="https://ko-fi.com/U4B028M2CY" target="_blank" rel="noopener noreferrer">Support on Ko-fi</a></li>
-            <li><a href="https://github.com/farukhetro/Linkedin-automation/issues" target="_blank" rel="noopener noreferrer">Report an Issue</a></li>
+            <li><a href="https://ko-fi.com/U4B028M2CY" target="_blank" rel="noopener noreferrer">Support on Ko-fi</a>
+            </li>
+            <li><a href="https://github.com/farukhetro/Linkedin-automation/issues" target="_blank"
+                rel="noopener noreferrer">Report an Issue</a></li>
           </ul>
         </div>
 
@@ -586,4 +587,5 @@ npm install</code></pre>
 
   <script src="app.js"></script>
 </body>
+
 </html>

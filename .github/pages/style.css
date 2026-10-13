@@ -241,134 +241,6 @@ p { font-weight: 500; color: var(--color-muted); }
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.dismissible-pill {
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.pill-remove-btn {
-  background: #ff5e5b;
-  color: #ffffff;
-  border: 1.5px solid #000000;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  min-width: 20px;
-  min-height: 20px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  line-height: 1;
-  cursor: pointer;
-  margin-left: 6px;
-  padding: 0;
-  font-weight: 900;
-  font-family: var(--font-body);
-  transition: var(--transition);
-}
-
-.pill-remove-btn:hover {
-  background: #000000;
-  color: #ffffff;
-  transform: scale(1.15);
-}
-
-.pill-remove-btn:active {
-  transform: scale(0.92);
-}
-
-.filter-chips-container {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.85rem;
-  margin: 1.75rem 0 2.25rem;
-  background: var(--bg-card);
-  border: var(--border-thick);
-  box-shadow: var(--shadow-sm);
-  border-radius: var(--radius-brutal);
-  padding: 0.85rem 1.25rem;
-}
-
-.filter-chips-label {
-  font-family: var(--font-heading);
-  font-weight: 900;
-  font-size: 0.88rem;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  color: var(--color-black);
-}
-
-.filter-chips-list {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.55rem;
-}
-
-.pill-chip {
-  display: inline-flex;
-  align-items: center;
-  background: var(--bg-card-alt);
-  color: var(--color-black);
-  border: 2px solid #000000;
-  box-shadow: 2px 2px 0px #000000;
-  padding: 0.35rem 0.75rem;
-  border-radius: var(--radius-pill);
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: var(--transition);
-  user-select: none;
-}
-
-.pill-chip.active {
-  background: var(--color-yellow);
-  box-shadow: 3px 3px 0px #000000;
-}
-
-.pill-chip:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0px #000000;
-}
-
-.filter-reset-btn {
-  background: var(--color-neon-green);
-  color: var(--color-black);
-  border: 2px solid #000000;
-  box-shadow: 2px 2px 0px #000000;
-  border-radius: 6px;
-  font-family: var(--font-heading);
-  font-weight: 900;
-  font-size: 0.82rem;
-  text-transform: uppercase;
-  padding: 0.4rem 0.85rem;
-  cursor: pointer;
-  transition: var(--transition);
-  margin-left: auto;
-}
-
-.filter-reset-btn:hover {
-  background: #000000;
-  color: #ffffff;
-  transform: translate(-1px, -1px);
-}
-
-.filter-empty-state {
-  background: var(--bg-card);
-  border: var(--border-thick);
-  box-shadow: var(--shadow-md);
-  border-radius: var(--radius-brutal);
-  padding: 2.5rem 1.5rem;
-  text-align: center;
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 1.15rem;
-  color: var(--color-black);
-  margin-top: 1rem;
-}
-
 .hero-title {
   margin-bottom: 1.5rem;
 }
@@ -423,7 +295,7 @@ p { font-weight: 500; color: var(--color-muted); }
 
 .pipeline-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 1.25rem;
 }
 
@@ -485,8 +357,8 @@ section {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.75rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
 }
 
 .brutal-card {
@@ -952,13 +824,6 @@ textarea.brutal-input {
   .form-card {
     padding: 1.75rem;
   }
-  .filter-chips-container {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .filter-reset-btn {
-    margin-left: 0;
-  }
 }
 
 @media (max-width: 768px) {
@@ -1017,9 +882,6 @@ textarea.brutal-input {
     width: 100%;
   }
   .hero-actions .btn {
-    width: 100%;
-  }
-  .filter-chips-list {
     width: 100%;
   }
 }
@@ -1096,10 +958,6 @@ textarea.brutal-input {
     font-size: 0.9rem;
     padding: 0.85rem 1.25rem;
   }
-  .pill-chip {
-    font-size: 0.78rem;
-    padding: 0.28rem 0.6rem;
-  }
 }
 
 @media (max-width: 360px) {
@@ -1122,10 +980,6 @@ textarea.brutal-input {
   .badge-brutal {
     font-size: 0.72rem;
     padding: 0.3rem 0.6rem;
-  }
-  .pill-chip {
-    font-size: 0.74rem;
-    padding: 0.25rem 0.5rem;
   }
   .scope-chip {
     font-size: 0.74rem;
@@ -1153,18 +1007,15 @@ textarea.brutal-input {
   .btn,
   .nav-btn,
   .mobile-toggle,
-  .code-copy-btn,
-  .filter-reset-btn {
+  .code-copy-btn {
     min-height: 44px;
   }
   .btn:hover,
-  .nav-btn:hover,
-  .pill-chip:hover {
+  .nav-btn:hover {
     transform: none;
   }
   .btn:active,
-  .nav-btn:active,
-  .pill-chip:active {
+  .nav-btn:active {
     transform: translate(2px, 2px);
   }
 }
@@ -1194,10 +1045,7 @@ textarea.brutal-input {
   .site-header,
   .hero-actions,
   .mobile-toggle,
-  .brutal-toast,
-  .filter-chips-container,
-  .filter-reset-btn,
-  .pill-remove-btn {
+  .brutal-toast {
     display: none !important;
   }
   body {
