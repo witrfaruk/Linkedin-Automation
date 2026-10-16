@@ -81,7 +81,23 @@ const server = http.createServer(async (req, res) => {
           console.log("========================================================");
           console.log(tokenData.refresh_token);
           console.log("========================================================\n");
-          console.log("Copy this massive string and add it to your GitHub Secrets as LINKEDIN_REFRESH_TOKEN!");
+          console.log("👉 Copy this token and add it to your GitHub Secrets as LINKEDIN_REFRESH_TOKEN!");
+          console.log("🔒 NOTE: This token is long-lived (valid up to 365 days). Keys do NOT auto-rotate every 5 days.\n");
+
+          try {
+            if (fs.existsSync(envPath)) {
+              let content = fs.readFileSync(envPath, 'utf-8');
+              if (content.includes('LINKEDIN_REFRESH_TOKEN=')) {
+                content = content.replace(/LINKEDIN_REFRESH_TOKEN=.*/g, `LINKEDIN_REFRESH_TOKEN=${tokenData.refresh_token}`);
+              } else {
+                content += `\nLINKEDIN_REFRESH_TOKEN=${tokenData.refresh_token}\n`;
+              }
+              fs.writeFileSync(envPath, content, 'utf-8');
+              console.log(`💾 Automatically saved LINKEDIN_REFRESH_TOKEN into ${path.basename(envPath)} for local testing!\n`);
+            }
+          } catch (writeErr) {
+            // Ignore if .env.local cannot be written
+          }
         } else {
           console.error("❌ Failed to get refresh token. LinkedIn responded with:\n", tokenData);
         }

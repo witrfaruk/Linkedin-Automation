@@ -18,6 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
     history.replaceState(null, '', window.location.pathname + window.location.search);
   });
 
+  // Dynamic automatic copyright year (2025, 2026, 2028, etc.)
+  const currentYear = new Date().getFullYear();
+  document.querySelectorAll('.current-year').forEach((el) => {
+    el.textContent = currentYear;
+  });
+
   const toggleBtn = document.querySelector('.mobile-toggle');
   const navMenu = document.querySelector('.nav-menu');
 

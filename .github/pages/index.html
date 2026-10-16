@@ -310,9 +310,21 @@ npm install</code></pre>
           <div class="step-row">
             <div class="step-badge">2</div>
             <div class="step-body">
-              <h3>Get LinkedIn OAuth Refresh Token</h3>
-              <p>Set your Client ID and Client Secret in <code>code/.env.local</code>, then run the built-in OAuth
-                helper:</p>
+              <h3>Create LinkedIn App & Get Refresh Token</h3>
+              <p>Follow these 3 quick steps in the <strong>LinkedIn Developer Portal</strong>:</p>
+              <ul style="padding-left: 1.25rem; font-size: 0.95rem; font-weight: 600; line-height: 1.7; margin: 0.5rem 0 0.75rem 0;">
+                <li><strong>1. Create App:</strong> Go to <a href="https://www.linkedin.com/developers/apps" target="_blank" rel="noopener noreferrer" style="color: #000; text-decoration: underline;">LinkedIn Developer Portal</a> &rarr; <em>Create app</em> &rarr; Link your Company Page.</li>
+                <li><strong>2. Add Products:</strong> Under the <em>Products</em> tab, request access to <em>"Share on LinkedIn"</em> and <em>"Sign In with LinkedIn using OpenID Connect"</em>.</li>
+                <li><strong>3. Configure Redirect URL:</strong> Under the <em>Auth</em> tab &rarr; <em>OAuth 2.0 settings</em> &rarr; add this exact Authorized redirect URL:</li>
+              </ul>
+              <div class="code-box" style="margin-bottom: 0.75rem;">
+                <div class="code-bar">
+                  <span>Authorized Redirect URL</span>
+                  <button type="button" class="code-copy-btn copy-secret-btn" data-secret="http://localhost:3000/callback">Copy</button>
+                </div>
+                <pre><code>http://localhost:3000/callback</code></pre>
+              </div>
+              <p>Save your <code>LINKEDIN_CLIENT_ID</code> and <code>LINKEDIN_CLIENT_SECRET</code> into <code>code/.env.local</code>, then run the OAuth helper:</p>
               <div class="code-box">
                 <div class="code-bar">
                   <span>Terminal</span>
@@ -321,8 +333,7 @@ npm install</code></pre>
                 <pre><code>npm run auth</code></pre>
               </div>
               <p style="font-size: 0.9rem; font-weight: 600; color: #444; margin-top: 0.5rem;">
-                This launches a local callback server, authenticates via your browser, and prints your long-lived
-                Refresh Token directly in your terminal.
+                Click "Allow" in your browser. The script prints your long-lived <code>LINKEDIN_REFRESH_TOKEN</code>. (Tokens are long-lived; keys do NOT auto-rotate every 5 days).
               </p>
             </div>
           </div>
@@ -579,7 +590,7 @@ npm install</code></pre>
       </div>
 
       <div class="footer-bottom">
-        <div>&copy; 2026 LinkedIn Automation. Open-source under MIT License.</div>
+        <div>&copy; <span class="current-year">2026</span> LinkedIn Automation. Open-source under MIT License.</div>
         <div>Built with Neo-Brutalism & ❤️ for developers worldwide.</div>
       </div>
     </div>
